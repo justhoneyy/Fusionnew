@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard - Fusion Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/portals.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Fusion Coaching</h2>
+        <div class="user-info">
+          <div class="user-avatar" id="sidebarUserAvatar">T</div>
+          <div class="user-details">
+            <h4 id="sidebarUserName">Teacher</h4>
+            <span id="sidebarUserRole">teacher</span>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          <a class="nav-item active" data-tab="dashboard" href="#">
+            <i class="fas fa-th-large"></i> Dashboard
+          </a>
+          <a class="nav-item" data-tab="profile" href="#">
+            <i class="fas fa-user"></i> My Profile
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Teaching</div>
+          <a class="nav-item" data-tab="students" href="#">
+            <i class="fas fa-users"></i> My Students
+          </a>
+          <a class="nav-item" data-tab="attendance" href="#">
+            <i class="fas fa-calendar-check"></i> Attendance
+          </a>
+          <a class="nav-item" data-tab="marks" href="#">
+            <i class="fas fa-chart-bar"></i> Marks Entry
+          </a>
+          <a class="nav-item" data-tab="tests" href="#">
+            <i class="fas fa-clipboard-list"></i> Tests
+          </a>
+          <a class="nav-item" data-tab="materials" href="#">
+            <i class="fas fa-book"></i> Study Materials
+          </a>
+          <a class="nav-item" data-tab="videos" href="#">
+            <i class="fas fa-play-circle"></i> Lecture Videos
+          </a>
+          <a class="nav-item" data-tab="homework" href="#">
+            <i class="fas fa-tasks"></i> Homework
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Communication</div>
+          <a class="nav-item" data-tab="notices" href="#">
+            <i class="fas fa-bullhorn"></i> Notices
+          </a>
+          <a class="nav-item" data-tab="doubts" href="#">
+            <i class="fas fa-question-circle"></i> Doubts
+            <span class="badge" id="doubtsBadge" style="display:none">0</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <a class="nav-item" id="logoutBtn" href="#" style="color: #ef4444;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <button id="menuToggle" style="display:none;position:fixed;top:16px;left:16px;z-index:200;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Dashboard Tab -->
+      <div class="tab-content" id="tab-dashboard">
+        <div class="content-header">
+          <h1>Teacher Dashboard</h1>
+          <div class="header-actions">
+            <button class="btn btn-outline btn-sm" onclick="location.reload()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="theme-toggle" id="themeToggle" style="width:40px;height:40px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);cursor:pointer;">
+              <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="dashboardStats">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+            <div class="stat-info"><p>Total Students</p><h3 id="totalStudents">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-info"><p>Today's Attendance</p><h3 id="todayAttendance">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="fas fa-clipboard-list"></i></div>
+            <div class="stat-info"><p>Upcoming Tests</p><h3 id="upcomingTests">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fas fa-question-circle"></i></div>
+            <div class="stat-info"><p>Pending Doubts</p><h3 id="pendingDoubts">-</h3></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students Tab -->
+      <div class="tab-content" id="tab-students" style="display:none;">
+        <div class="content-header">
+          <h1>My Students</h1>
+        </div>
+        <div class="card">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Student ID</th><th>Name</th><th>Class</th><th>Section</th><th>Roll No.</th><th>Phone</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="studentsTableBody">
+                <tr><td colspan="7" style="text-align:center;padding:20px;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attendance Tab -->
+      <div class="tab-content" id="tab-attendance" style="display:none;">
+        <div class="content-header">
+          <h1>Mark Attendance</h1>
+        </div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="grid-2" style="margin-bottom:16px;">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="attendanceDate" value="">
+            </div>
+            <div class="form-group">
+              <label>Class</label>
+              <select id="attendanceClass" onchange="loadAttendanceStudents()">
+                <option value="">Select Class</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Roll No.</th><th>Student ID</th><th>Name</th><th>Status</th></tr>
+              </thead>
+              <tbody id="attendanceTableBody">
+                <tr><td colspan="4" style="text-align:center;padding:20px;">Select class to load students</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:12px;">
+            <button class="btn btn-primary" onclick="submitAttendance()"><i class="fas fa-save"></i> Save Attendance</button>
+            <button class="btn btn-outline" onclick="markAllPresent()"><i class="fas fa-check-double"></i> Mark All Present</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marks Entry Tab -->
+      <div class="tab-content" id="tab-marks" style="display:none;">
+        <div class="content-header">
+          <h1>Marks Entry</h1>
+        </div>
+        <div class="card">
+          <div class="grid-3" style="margin-bottom:20px;">
+            <div class="form-group">
+              <label>Class</label>
+              <select id="marksClass" onchange="loadStudentsForMarksEntry()">
+                <option value="">Select Class</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="marksSubject">
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Exam Type</label>
+              <select id="marksExamType">
+                <option value="unit_test">Unit Test</option>
+                <option value="half_yearly">Half Yearly</option>
+                <option value="final">Final Exam</option>
+                <option value="weekly">Weekly Test</option>
+                <option value="monthly">Monthly Test</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Total Marks</label>
+            <input type="number" id="marksTotalMarks" value="100" style="width:200px;">
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Roll No.</th><th>Student ID</th><th>Name</th><th>Marks</th><th>%</th><th>Grade</th></tr>
+              </thead>
+              <tbody id="marksTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:20px;">Select class to load students</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="submitMarksEntry()"><i class="fas fa-save"></i> Save Marks</button>
+        </div>
+      </div>
+
+      <!-- Create Test Tab -->
+      <div class="tab-content" id="tab-tests" style="display:none;">
+        <div class="content-header">
+          <h1>Create Online Test</h1>
+        </div>
+        <div class="card">
+          <div class="grid-2" style="gap:20px;">
+            <div>
+              <div class="form-group">
+                <label>Test Title</label>
+                <input type="text" id="testTitle" placeholder="e.g., Unit Test 1 - Physics">
+              </div>
+              <div class="form-group">
+                <label>Subject</label>
+                <select id="testSubject">
+                  <option value="">Select Subject</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Class</label>
+                <select id="testClass">
+                  <option value="">Select Class</option>
+                  <option value="9">Class 9</option>
+                  <option value="10">Class 10</option>
+                  <option value="11">Class 11</option>
+                  <option value="12">Class 12</option>
+                </select>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Duration (minutes)</label>
+                  <input type="number" id="testDuration" value="60">
+                </div>
+                <div class="form-group">
+                  <label>Total Marks</label>
+                  <input type="number" id="testTotalMarks" value="100">
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Passing Marks</label>
+                  <input type="number" id="testPassingMarks" value="33">
+                </div>
+                <div class="form-group">
+                  <label>Negative Marking</label>
+                  <input type="number" id="testNegativeMarking" value="0.25" step="0.25">
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Start Time</label>
+                  <input type="datetime-local" id="testStartTime">
+                </div>
+                <div class="form-group">
+                  <label>End Time</label>
+                  <input type="datetime-local" id="testEndTime">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Instructions</label>
+                <textarea id="testInstructions" rows="3" placeholder="Enter test instructions..."></textarea>
+              </div>
+              <div style="display:flex;gap:16px;">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                  <input type="checkbox" id="testRandomQuestions"> Random Questions
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                  <input type="checkbox" id="testFullScreen" checked> Full Screen Required
+                </label>
+              </div>
+            </div>
+            <div>
+              <h3 style="margin-bottom:12px;">Add Questions</h3>
+              <div id="questionsContainer">
+                <div class="test-question" style="border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;">
+                  <div class="form-group">
+                    <label>Question Type</label>
+                    <select class="question-type" onchange="toggleQuestionType(this)">
+                      <option value="mcq">MCQ</option>
+                      <option value="subjective">Subjective</option>
+                      <option value="true_false">True/False</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Question</label>
+                    <textarea class="question-text" rows="2" placeholder="Enter question..."></textarea>
+                  </div>
+                  <div class="mcq-options">
+                    <div class="grid-2">
+                      <div class="form-group"><label>Option A</label><input type="text" class="option-a" placeholder="Option A"></div>
+                      <div class="form-group"><label>Option B</label><input type="text" class="option-b" placeholder="Option B"></div>
+                      <div class="form-group"><label>Option C</label><input type="text" class="option-c" placeholder="Option C"></div>
+                      <div class="form-group"><label>Option D</label><input type="text" class="option-d" placeholder="Option D"></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Correct Answer</label>
+                    <input type="text" class="correct-answer" placeholder="For MCQ: A/B/C/D, For True/False: true/false">
+                  </div>
+                  <div class="grid-2">
+                    <div class="form-group">
+                      <label>Marks</label>
+                      <input type="number" class="question-marks" value="1" step="0.5">
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="this.closest('.test-question').remove()" style="align-self:flex-end;">
+                      <i class="fas fa-trash"></i> Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-outline" onclick="addQuestion()" style="width:100%;margin-top:8px;">
+                <i class="fas fa-plus"></i> Add Question
+              </button>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:20px;" onclick="createTest()">
+            <i class="fas fa-save"></i> Create Test
+          </button>
+        </div>
+      </div>
+
+      <!-- Study Materials Tab -->
+      <div class="tab-content" id="tab-materials" style="display:none;">
+        <div class="content-header">
+          <h1>Upload Study Material</h1>
+        </div>
+        <div class="card">
+          <div class="grid-2" style="margin-bottom:20px;">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="materialTitle" placeholder="e.g., Physics Chapter 1 Notes">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" id="materialDescription" placeholder="Brief description">
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="materialSubject">
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Class</label>
+              <select id="materialClass">
+                <option value="">Select Class</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>File</label>
+            <input type="file" id="materialFile">
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;cursor:pointer;">
+            <input type="checkbox" id="materialDownloadable"> Allow Download
+          </label>
+          <button class="btn btn-primary" onclick="uploadMaterial()">
+            <i class="fas fa-upload"></i> Upload Material
+          </button>
+        </div>
+        <div class="card" style="margin-top:20px;">
+          <h3 style="margin-bottom:16px;">Uploaded Materials</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Title</th><th>Subject</th><th>Class</th><th>Type</th><th>Date</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="materialsTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:20px;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lecture Videos Tab -->
+      <div class="tab-content" id="tab-videos" style="display:none;">
+        <div class="content-header">
+          <h1>Upload Lecture Videos</h1>
+        </div>
+        <div class="card">
+          <div class="grid-2" style="margin-bottom:20px;">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="videoTitle" placeholder="e.g., Lecture 1: Introduction to Mechanics">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" id="videoDescription" placeholder="Brief description">
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="videoSubject">
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Class</label>
+              <select id="videoClass">
+                <option value="">Select Class</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Duration (minutes)</label>
+              <input type="number" id="videoDuration" placeholder="e.g., 45">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Video File</label>
+            <input type="file" id="videoFile" accept="video/*">
+          </div>
+          <button class="btn btn-primary" onclick="uploadVideo()">
+            <i class="fas fa-upload"></i> Upload Video
+          </button>
+        </div>
+      </div>
+
+      <!-- Homework Tab -->
+      <div class="tab-content" id="tab-homework" style="display:none;">
+        <div class="content-header">
+          <h1>Create Homework</h1>
+        </div>
+        <div class="card">
+          <div class="grid-2" style="margin-bottom:20px;">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="homeworkTitle" placeholder="e.g., Chapter 2 Exercise">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="homeworkDescription" rows="3" placeholder="Homework description..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="homeworkSubject">
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Class</label>
+              <select id="homeworkClass">
+                <option value="">Select Class</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Due Date</label>
+              <input type="datetime-local" id="homeworkDueDate">
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="createHomework()">
+            <i class="fas fa-plus"></i> Create Homework
+          </button>
+        </div>
+        <div class="card" style="margin-top:20px;">
+          <h3 style="margin-bottom:16px;">Homework Submissions</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Homework</th><th>Subject</th><th>Due Date</th><th>Submissions</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="homeworkTableBody">
+                <tr><td colspan="5" style="text-align:center;padding:20px;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notices Tab -->
+      <div class="tab-content" id="tab-notices" style="display:none;">
+        <div class="content-header">
+          <h1>Create Notice</h1>
+        </div>
+        <div class="card">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="noticeTitle" placeholder="Notice title">
+          </div>
+          <div class="form-group">
+            <label>Content</label>
+            <textarea id="noticeContent" rows="4" placeholder="Notice content..."></textarea>
+          </div>
+          <div class="grid-3" style="margin-bottom:16px;">
+            <div class="form-group">
+              <label>Type</label>
+              <select id="noticeType">
+                <option value="general">General</option>
+                <option value="class">Class-wise</option>
+                <option value="section">Section-wise</option>
+                <option value="urgent">Urgent</option>
+                <option value="exam">Exam</option>
+                <option value="fee">Fee</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Class</label>
+              <select id="noticeClass">
+                <option value="">All Classes</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+                <option value="11">Class 11</option>
+                <option value="12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Section (optional)</label>
+              <input type="text" id="noticeSection" placeholder="e.g., A">
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="createNotice()">
+            <i class="fas fa-bullhorn"></i> Post Notice
+          </button>
+        </div>
+      </div>
+
+      <!-- Doubts Tab -->
+      <div class="tab-content" id="tab-doubts" style="display:none;">
+        <div class="content-header">
+          <h1>Student Doubts</h1>
+        </div>
+        <div class="card">
+          <div id="doubtsList">
+            <p style="text-align:center;padding:20px;color:var(--text-secondary);">Loading doubts...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <script src="/js/portal-common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const { apiFetch, showToast } = window.FusionPortal;
+
+      // Load dashboard
+      async function loadDashboard() {
+        try {
+          const data = await apiFetch('/teacher/dashboard');
+          document.getElementById('totalStudents').textContent = data.totalStudents;
+          document.getElementById('todayAttendance').textContent = data.todayAttendance;
+          document.getElementById('upcomingTests').textContent = data.upcomingTests;
+          document.getElementById('pendingDoubts').textContent = data.pendingDoubts;
+        } catch (error) {
+          showToast('Failed to load dashboard', 'error');
+        }
+      }
+
+      // Load students
+      async function loadStudents() {
+        try {
+          const data = await apiFetch('/teacher/students');
+          const tbody = document.getElementById('studentsTableBody');
+          tbody.innerHTML = data.map(s => `
+            <tr>
+              <td>${s.student_id}</td>
+              <td>${s.full_name}</td>
+              <td>${s.class}</td>
+              <td>${s.section || '-'}</td>
+              <td>${s.roll_number || '-'}</td>
+              <td>${s.phone || '-'}</td>
+              <td>
+                <button class="btn btn-outline btn-sm" onclick="viewPerformance('${s.id}')">
+                  <i class="fas fa-chart-line"></i> Performance
+                </button>
+              </td>
+            </tr>
+          `).join('');
+        } catch (error) {
+          showToast('Failed to load students', 'error');
+        }
+      }
+
+      // Mark attendance
+      window.loadAttendanceStudents = async function() {
+        const className = document.getElementById('attendanceClass').value;
+        if (!className) return;
+
+        try {
+          const data = await apiFetch(`/teacher/students?class=${className}`);
+          const tbody = document.getElementById('attendanceTableBody');
+          tbody.innerHTML = data.map(s => `
+            <tr>
+              <td>${s.roll_number || '-'}</td>
+              <td>${s.student_id}</td>
+              <td>${s.full_name}</td>
+              <td>
+                <select class="attendance-status" data-student-id="${s.id}">
+                  <option value="present">Present</option>
+                  <option value="absent">Absent</option>
+                  <option value="late">Late</option>
+                  <option value="half_day">Half Day</option>
+                </select>
+              </td>
+            </tr>
+          `).join('');
+        } catch (error) {
+          showToast('Failed to load students', 'error');
+        }
+      };
+
+      window.markAllPresent = function() {
+        document.querySelectorAll('.attendance-status').forEach(select => {
+          select.value = 'present';
+        });
+      };
+
+      window.submitAttendance = async function() {
+        const classId = document.getElementById('attendanceClass').value;
+        const date = document.getElementById('attendanceDate').value || new Date().toISOString().split('T')[0];
+        
+        if (!classId) {
+          showToast('Please select a class', 'warning');
+          return;
+        }
+
+        const attendanceData = [];
+        document.querySelectorAll('.attendance-status').forEach(select => {
+          attendanceData.push({
+            studentId: select.dataset.studentId,
+            status: select.value
+          });
+        });
+
+        try {
+          await apiFetch('/teacher/attendance', {
+            method: 'POST',
+            body: JSON.stringify({ date, classId, attendanceData })
+          });
+          showToast('Attendance saved successfully!', 'success');
+        } catch (error) {
+          showToast('Failed to save attendance', 'error');
+        }
+      };
+
+      // Create test
+      window.addQuestion = function() {
+        const container = document.getElementById('questionsContainer');
+        const questionHTML = `
+          <div class="test-question" style="border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;">
+            <div class="form-group">
+              <label>Question Type</label>
+              <select class="question-type" onchange="toggleQuestionType(this)">
+                <option value="mcq">MCQ</option>
+                <option value="subjective">Subjective</option>
+                <option value="true_false">True/False</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Question</label>
+              <textarea class="question-text" rows="2" placeholder="Enter question..."></textarea>
+            </div>
+            <div class="mcq-options">
+              <div class="grid-2">
+                <div class="form-group"><label>Option A</label><input type="text" class="option-a" placeholder="Option A"></div>
+                <div class="form-group"><label>Option B</label><input type="text" class="option-b" placeholder="Option B"></div>
+                <div class="form-group"><label>Option C</label><input type="text" class="option-c" placeholder="Option C"></div>
+                <div class="form-group"><label>Option D</label><input type="text" class="option-d" placeholder="Option D"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Correct Answer</label>
+              <input type="text" class="correct-answer" placeholder="For MCQ: A/B/C/D">
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Marks</label>
+                <input type="number" class="question-marks" value="1" step="0.5">
+              </div>
+              <button class="btn btn-danger btn-sm" onclick="this.closest('.test-question').remove()" style="align-self:flex-end;">
+                <i class="fas fa-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', questionHTML);
+      };
+
+      window.toggleQuestionType = function(select) {
+        const questionDiv = select.closest('.test-question');
+        const mcqOptions = questionDiv.querySelector('.mcq-options');
+        const correctAnswer = questionDiv.querySelector('.correct-answer');
+        
+        if (select.value === 'subjective') {
+          mcqOptions.style.display = 'none';
+          correctAnswer.placeholder = 'Enter expected answer or leave blank for manual evaluation';
+        } else if (select.value === 'true_false') {
+          mcqOptions.style.display = 'none';
+          correctAnswer.placeholder = 'Enter: true or false';
+        } else {
+          mcqOptions.style.display = 'block';
+          correctAnswer.placeholder = 'Enter: A, B, C, or D';
+        }
+      };
+
+      window.createTest = async function() {
+        const questions = [];
+        document.querySelectorAll('#questionsContainer .test-question').forEach(qDiv => {
+          const qType = qDiv.querySelector('.question-type').value;
+          const question = {
+            questionText: qDiv.querySelector('.question-text').value,
+            questionType: qType,
+            correctAnswer: qDiv.querySelector('.correct-answer').value,
+            marks: parseFloat(qDiv.querySelector('.question-marks').value) || 1
+          };
+
+          if (qType === 'mcq') {
+            question.options = {
+              A: qDiv.querySelector('.option-a').value,
+              B: qDiv.querySelector('.option-b').value,
+              C: qDiv.querySelector('.option-c').value,
+              D: qDiv.querySelector('.option-d').value
+            };
+          }
+
+          if (question.questionText) questions.push(question);
+        });
+
+        const testData = {
+          title: document.getElementById('testTitle').value,
+          subjectId: document.getElementById('testSubject').value,
+          classId: document.getElementById('testClass').value,
+          durationMinutes: parseInt(document.getElementById('testDuration').value),
+          totalMarks: parseFloat(document.getElementById('testTotalMarks').value),
+          passingMarks: parseFloat(document.getElementById('testPassingMarks').value),
+          negativeMarking: parseFloat(document.getElementById('testNegativeMarking').value) || 0,
+          instructions: document.getElementById('testInstructions').value,
+          startTime: document.getElementById('testStartTime').value,
+          endTime: document.getElementById('testEndTime').value,
+          randomQuestions: document.getElementById('testRandomQuestions').checked,
+          fullScreenRequired: document.getElementById('testFullScreen').checked,
+          questions
+        };
+
+        try {
+          await apiFetch('/teacher/tests', {
+            method: 'POST',
+            body: JSON.stringify(testData)
+          });
+          showToast('Test created successfully!', 'success');
+        } catch (error) {
+          showToast('Failed to create test', 'error');
+        }
+      };
+
+      // Upload material
+      window.uploadMaterial = async function() {
+        const fileInput = document.getElementById('materialFile');
+        if (!fileInput.files[0]) {
+          showToast('Please select a file', 'warning');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('title', document.getElementById('materialTitle').value);
+        formData.append('description', document.getElementById('materialDescription').value);
+        formData.append('subjectId', document.getElementById('materialSubject').value);
+        formData.append('classId', document.getElementById('materialClass').value);
+        formData.append('isDownloadable', document.getElementById('materialDownloadable').checked);
+
+        try {
+          const token = window.FusionPortal.getToken();
+          const response = await fetch('/api/teacher/materials', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+          });
+          
+          if (response.ok) {
+            showToast('Material uploaded successfully!', 'success');
+          } else {
+            throw new Error('Upload failed');
+          }
+        } catch (error) {
+          showToast('Failed to upload material', 'error');
+        }
+      };
+
+      // Upload video
+      window.uploadVideo = async function() {
+        const fileInput = document.getElementById('videoFile');
+        if (!fileInput.files[0]) {
+          showToast('Please select a video file', 'warning');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('video', fileInput.files[0]);
+        formData.append('title', document.getElementById('videoTitle').value);
+        formData.append('description', document.getElementById('videoDescription').value);
+        formData.append('subjectId', document.getElementById('videoSubject').value);
+        formData.append('classId', document.getElementById('videoClass').value);
+        formData.append('duration', document.getElementById('videoDuration').value);
+
+        try {
+          const token = window.FusionPortal.getToken();
+          const response = await fetch('/api/teacher/videos', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+          });
+          
+          if (response.ok) {
+            showToast('Video uploaded successfully!', 'success');
+          } else {
+            throw new Error('Upload failed');
+          }
+        } catch (error) {
+          showToast('Failed to upload video', 'error');
+        }
+      };
+
+      // Create homework
+      window.createHomework = async function() {
+        const data = {
+          title: document.getElementById('homeworkTitle').value,
+          description: document.getElementById('homeworkDescription').value,
+          subjectId: document.getElementById('homeworkSubject').value,
+          classId: document.getElementById('homeworkClass').value,
+          dueDate: document.getElementById('homeworkDueDate').value
+        };
+
+        try {
+          await apiFetch('/teacher/homework', {
+            method: 'POST',
+            body: JSON.stringify(data)
+          });
+          showToast('Homework created successfully!', 'success');
+        } catch (error) {
+          showToast('Failed to create homework', 'error');
+        }
+      };
+
+      // Create notice
+      window.createNotice = async function() {
+        const data = {
+          title: document.getElementById('noticeTitle').value,
+          content: document.getElementById('noticeContent').value,
+          noticeType: document.getElementById('noticeType').value,
+          classId: document.getElementById('noticeClass').value || null,
+          section: document.getElementById('noticeSection').value || null
+        };
+
+        try {
+          await apiFetch('/teacher/notices', {
+            method: 'POST',
+            body: JSON.stringify(data)
+          });
+          showToast('Notice posted successfully!', 'success');
+        } catch (error) {
+          showToast('Failed to post notice', 'error');
+        }
+      };
+
+      // Set today's date for attendance
+      document.getElementById('attendanceDate').value = new Date().toISOString().split('T')[0];
+
+      // Initial load
+      loadDashboard();
+      
+      // Tab switching
+      document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const tab = this.dataset.tab;
+          
+          document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+          this.classList.add('active');
+          
+          document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+          const tabContent = document.getElementById(`tab-${tab}`);
+          if (tabContent) tabContent.style.display = 'block';
+          
+          if (tab === 'students') loadStudents();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
