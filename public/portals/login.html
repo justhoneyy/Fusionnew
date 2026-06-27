@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fusion Coaching - Portal Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/portals.css">
+  <style>
+    :root {
+      --primary: #1a56db; --primary-dark: #0f3a8a; --primary-light: #3b82f6;
+      --primary-gradient: linear-gradient(135deg, #1a56db 0%, #3b82f6 100%);
+      --bg: #ffffff; --bg-alt: #f8fafc; --bg-card: #ffffff;
+      --bg-glass: rgba(255,255,255,0.8);
+      --text: #0f172a; --text-secondary: #475569; --border: #e2e8f0;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06); --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+      --radius: 12px; --radius-lg: 20px; --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    [data-theme="dark"] {
+      --bg: #0b1120; --bg-alt: #111827; --bg-card: #1e293b;
+      --bg-glass: rgba(30,41,59,0.8); --text: #f1f5f9; --text-secondary: #94a3b8;
+      --border: #1e293b; --shadow: 0 4px 20px rgba(0,0,0,0.4);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      transition:background 0.6s,color 0.6s;
+      background-image: radial-gradient(circle at 20% 80%, rgba(26,86,219,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(14,165,233,0.05) 0%, transparent 50%);
+    }
+    .login-container{
+      width:100%;max-width:440px;padding:20px;
+    }
+    .login-card{
+      background:var(--bg-glass);backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);border:1px solid var(--border);
+      border-radius:var(--radius-lg);padding:40px 32px;
+      box-shadow:var(--shadow-lg);transition:all var(--transition);
+    }
+    .login-logo{
+      text-align:center;margin-bottom:32px;
+    }
+    .login-logo h1{
+      font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;
+      background:var(--primary-gradient);-webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .role-tabs{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;
+    }
+    .role-tab{
+      padding:10px 8px;border-radius:var(--radius);text-align:center;
+      font-size:12px;font-weight:600;cursor:pointer;
+      border:2px solid var(--border);background:var(--bg-card);
+      color:var(--text-secondary);transition:all var(--transition);
+      display:flex;flex-direction:column;align-items:center;gap:4px;
+    }
+    .role-tab i{font-size:18px}
+    .role-tab.active{background:var(--primary-gradient);color:#fff;border-color:transparent;box-shadow:0 4px 15px rgba(26,86,219,0.3)}
+    .role-tab:hover:not(.active){border-color:var(--primary-light);color:var(--primary)}
+    .form-group{margin-bottom:20px}
+    .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text)}
+    .form-group input{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:10px;
+      background:var(--bg);color:var(--text);font-size:14px;transition:all var(--transition)}
+    .form-group input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,86,219,0.1);outline:none}
+    .form-options{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;font-size:13px}
+    .remember-me{display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--text-secondary)}
+    .forgot-password{color:var(--primary);cursor:pointer;font-weight:500}
+    .forgot-password:hover{text-decoration:underline}
+    .btn-submit{width:100%;padding:14px;border-radius:10px;background:var(--primary-gradient);
+      color:#fff;font-size:15px;font-weight:600;border:none;cursor:pointer;
+      transition:all var(--transition);box-shadow:0 4px 15px rgba(26,86,219,0.35)}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,86,219,0.45)}
+    .btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+    .error-message{background:rgba(239,68,68,0.1);border:1px solid #ef4444;color:#ef4444;
+      padding:12px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+    .success-message{background:rgba(16,185,129,0.1);border:1px solid #10b981;color:#10b981;
+      padding:12px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+    .back-link{text-align:center;margin-top:20px;font-size:14px;color:var(--text-secondary)}
+    .back-link a{color:var(--primary);font-weight:500}
+    .theme-toggle{position:fixed;top:20px;right:20px;width:44px;height:44px;
+      border-radius:50%;background:var(--bg-card);border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;
+      font-size:18px;color:var(--text);transition:all var(--transition);z-index:100}
+    .theme-toggle:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    @media(max-width:480px){
+      .login-card{padding:28px 20px}
+      .role-tabs{gap:4px}
+      .role-tab{font-size:10px;padding:8px 4px}
+      .role-tab i{font-size:14px}
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-logo">
+        <h1>Fusion Coaching</h1>
+        <p style="color:var(--text-secondary);font-size:14px;margin-top:4px;">Portal Login</p>
+      </div>
+
+      <div class="role-tabs">
+        <div class="role-tab active" data-role="student">
+          <i class="fas fa-user-graduate"></i> Student
+        </div>
+        <div class="role-tab" data-role="teacher">
+          <i class="fas fa-chalkboard-teacher"></i> Teacher
+        </div>
+        <div class="role-tab" data-role="parent">
+          <i class="fas fa-users"></i> Parent
+        </div>
+        <div class="role-tab" data-role="admin">
+          <i class="fas fa-shield-alt"></i> Admin
+        </div>
+      </div>
+
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Username or Email</label>
+          <input type="text" id="username" placeholder="Enter your username or email" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe"> Remember me
+          </label>
+          <span class="forgot-password" id="forgotPassword">Forgot Password?</span>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+      </form>
+    </div>
+    <div class="back-link">
+      <a href="/"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-card);border-radius:var(--radius-lg);padding:32px;max-width:400px;width:90%;">
+      <h3 style="margin-bottom:16px;">Forgot Password</h3>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Enter your email address and we'll send you a reset link.</p>
+      <div class="form-group">
+        <label for="resetEmail">Email Address</label>
+        <input type="email" id="resetEmail" placeholder="Enter your email">
+      </div>
+      <button class="btn-submit" id="sendResetBtn" style="margin-bottom:8px;">Send Reset Link</button>
+      <button style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;" onclick="document.getElementById('forgotModal').style.display='none'">Cancel</button>
+    </div>
+  </div>
+
+  <script src="/js/auth.js"></script>
+</body>
+</html>
