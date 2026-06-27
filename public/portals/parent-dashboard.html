@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent Dashboard - Fusion Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/portals.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Fusion Coaching</h2>
+        <div class="user-info">
+          <div class="user-avatar" id="sidebarUserAvatar">P</div>
+          <div class="user-details">
+            <h4 id="sidebarUserName">Parent</h4>
+            <span id="sidebarUserRole">parent</span>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          <a class="nav-item active" data-tab="dashboard" href="#">
+            <i class="fas fa-th-large"></i> Dashboard
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">My Child</div>
+          <a class="nav-item" data-tab="attendance" href="#">
+            <i class="fas fa-calendar-check"></i> Attendance
+          </a>
+          <a class="nav-item" data-tab="marks" href="#">
+            <i class="fas fa-chart-bar"></i> Marks & Performance
+          </a>
+          <a class="nav-item" data-tab="tests" href="#">
+            <i class="fas fa-clipboard-list"></i> Test Results
+          </a>
+          <a class="nav-item" data-tab="homework" href="#">
+            <i class="fas fa-tasks"></i> Homework Status
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Finance</div>
+          <a class="nav-item" data-tab="fees" href="#">
+            <i class="fas fa-rupee-sign"></i> Fee Payment
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Communication</div>
+          <a class="nav-item" data-tab="queries" href="#">
+            <i class="fas fa-comments"></i> Queries
+          </a>
+          <a class="nav-item" data-tab="notifications" href="#">
+            <i class="fas fa-bell"></i> Notifications
+            <span class="badge" id="notifBadge" style="display:none">0</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <a class="nav-item" id="logoutBtn" href="#" style="color: #ef4444;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <button id="menuToggle" style="display:none;position:fixed;top:16px;left:16px;z-index:200;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Dashboard Tab -->
+      <div class="tab-content" id="tab-dashboard">
+        <div class="content-header">
+          <h1>Parent Dashboard</h1>
+          <div class="header-actions">
+            <select id="childSelector" onchange="switchChild()" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);">
+              <option value="">Select Child</option>
+            </select>
+            <button class="theme-toggle" id="themeToggle" style="width:40px;height:40px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);cursor:pointer;">
+              <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="dashboardStats">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-info"><p>Attendance</p><h3 id="attendancePercent">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-info"><p>Overall %</p><h3 id="overallPercent">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="fas fa-tasks"></i></div>
+            <div class="stat-info"><p>Homework Done</p><h3 id="homeworkDone">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fas fa-rupee-sign"></i></div>
+            <div class="stat-info"><p>Fee Status</p><h3 id="feeStatus">-</h3></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:20px;">
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Attendance Trend</h3>
+            <canvas id="attendanceChart" width="400" height="250"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Subject-wise Performance</h3>
+            <canvas id="subjectPerformanceChart" width="400" height="250"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Monthly Improvement</h3>
+            <canvas id="monthlyTrendChart" width="400" height="250"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Test Scores</h3>
+            <canvas id="testScoresChart" width="400" height="250"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attendance Tab -->
+      <div class="tab-content" id="tab-attendance" style="display:none;">
+        <div class="content-header">
+          <h1>Attendance Report</h1>
+        </div>
+        <div class="card">
+          <div class="grid-2" style="margin-bottom:16px;">
+            <div>
+              <h3>Monthly Overview</h3>
+              <div class="calendar-grid" id="attendanceCalendar" style="margin-top:12px;"></div>
+            </div>
+            <div>
+              <canvas id="attendancePieChart" width="300" height="300"></canvas>
+            </div>
+          </div>
+          <div class="table-container" style="margin-top:20px;">
+            <table>
+              <thead>
+                <tr><th>Date</th><th>Status</th><th>Remarks</th></tr>
+              </thead>
+              <tbody id="attendanceTableBody">
+                <tr><td colspan="3" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marks Tab -->
+      <div class="tab-content" id="tab-marks" style="display:none;">
+        <div class="content-header">
+          <h1>Marks & Performance</h1>
+        </div>
+        
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Subject-wise Average</h3>
+            <canvas id="subjectAvgChart" width="400" height="300"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Exam-wise Performance</h3>
+            <canvas id="examPerformanceChart" width="400" height="300"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:16px;">All Marks</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Subject</th><th>Exam Type</th><th>Marks</th><th>Total</th><th>Percentage</th><th>Grade</th><th>Date</th></tr>
+              </thead>
+              <tbody id="marksTableBody">
+                <tr><td colspan="7" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test Results Tab -->
+      <div class="tab-content" id="tab-tests" style="display:none;">
+        <div class="content-header">
+          <h1>Online Test Results</h1>
+        </div>
+        <div class="card">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Test</th><th>Subject</th><th>Score</th><th>Total</th><th>Percentage</th><th>Status</th><th>Date</th></tr>
+              </thead>
+              <tbody id="testsTableBody">
+                <tr><td colspan="7" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Homework Tab -->
+      <div class="tab-content" id="tab-homework" style="display:none;">
+        <div class="content-header">
+          <h1>Homework Status</h1>
+        </div>
+        <div class="stats-grid" style="margin-bottom:20px;">
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-info"><p>Submitted</p><h3 id="hwSubmitted">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fas fa-times-circle"></i></div>
+            <div class="stat-info"><p>Overdue</p><h3 id="hwOverdue">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fas fa-clock"></i></div>
+            <div class="stat-info"><p>Pending</p><h3 id="hwPending">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="fas fa-star"></i></div>
+            <div class="stat-info"><p>Avg Marks</p><h3 id="hwAvgMarks">-</h3></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Title</th><th>Subject</th><th>Due Date</th><th>Status</th><th>Marks</th></tr>
+              </thead>
+              <tbody id="homeworkTableBody">
+                <tr><td colspan="5" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fees Tab -->
+      <div class="tab-content" id="tab-fees" style="display:none;">
+        <div class="content-header">
+          <h1>Fee Payment</h1>
+        </div>
+        <div class="card" style="margin-bottom:20px;">
+          <h3 style="margin-bottom:16px;">Fee Summary</h3>
+          <div class="grid-2">
+            <div style="padding:20px;background:var(--bg);border-radius:8px;">
+              <p style="color:var(--text-secondary);">Total Fee</p>
+              <h2 style="font-size:28px;" id="feeTotal">₹0</h2>
+            </div>
+            <div style="padding:20px;background:var(--bg);border-radius:8px;">
+              <p style="color:var(--text-secondary);">Amount Paid</p>
+              <h2 style="font-size:28px;color:#10b981;" id="feePaid">₹0</h2>
+            </div>
+            <div style="padding:20px;background:var(--bg);border-radius:8px;">
+              <p style="color:var(--text-secondary);">Remaining</p>
+              <h2 style="font-size:28px;color:#ef4444;" id="feeRemaining">₹0</h2>
+            </div>
+            <div style="padding:20px;background:var(--bg);border-radius:8px;">
+              <p style="color:var(--text-secondary);">Due Date</p>
+              <h2 style="font-size:20px;" id="feeDueDate">-</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <h3 style="margin-bottom:16px;">Make Payment</h3>
+          <div class="form-group">
+            <label>Amount (₹)</label>
+            <input type="number" id="paymentAmount" placeholder="Enter amount" style="width:300px;">
+          </div>
+          <button class="btn btn-primary" onclick="makePayment()">
+            <i class="fas fa-credit-card"></i> Pay Now
+          </button>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom:16px;">Transaction History</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Receipt No.</th><th>Amount</th><th>Type</th><th>Method</th><th>Date</th></tr>
+              </thead>
+              <tbody id="transactionsTableBody">
+                <tr><td colspan="5" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Queries Tab -->
+      <div class="tab-content" id="tab-queries" style="display:none;">
+        <div class="content-header">
+          <h1>Send Query</h1>
+        </div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" id="querySubject" placeholder="Query subject">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="queryMessage" rows="4" placeholder="Write your message..."></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="sendQuery()">
+            <i class="fas fa-paper-plane"></i> Send Query
+          </button>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:16px;">Previous Queries</h3>
+          <div id="queriesList">
+            <p style="text-align:center;color:var(--text-secondary);">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications Tab -->
+      <div class="tab-content" id="tab-notifications" style="display:none;">
+        <div class="content-header">
+          <h1>Notifications</h1>
+        </div>
+        <div class="card">
+          <div id="notificationsList">
+            <p style="text-align:center;color:var(--text-secondary);">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="/js/portal-common.js"></script>
+  <script src="/js/chart-init.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const { apiFetch, showToast } = window.FusionPortal;
+      let currentChildId = null;
+      let children = [];
+
+      // Load children
+      async function loadChildren() {
+        try {
+          children = await apiFetch('/parent/child');
+          const selector = document.getElementById('childSelector');
+          
+          if (children.length === 0) {
+            selector.innerHTML = '<option value="">No children found</option>';
+            return;
+          }
+
+          selector.innerHTML = children.map(c => 
+            `<option value="${c.id}">${c.full_name} - Class ${c.class} (${c.student_id})</option>`
+          ).join('');
+
+          if (children.length > 0) {
+            currentChildId = children[0].id;
+            selector.value = currentChildId;
+            loadAllData();
+          }
+        } catch (error) {
+          showToast('Failed to load children', 'error');
+        }
+      }
+
+      window.switchChild = function() {
+        currentChildId = document.getElementById('childSelector').value;
+        if (currentChildId) loadAllData();
+      };
+
+      async function loadAllData() {
+        if (!currentChildId) return;
+        
+        try {
+          const [attendance, marks, homework, fees, tests] = await Promise.all([
+            apiFetch(`/parent/attendance/${currentChildId}`),
+            apiFetch(`/parent/marks/${currentChildId}`),
+            apiFetch(`/parent/homework/${currentChildId}`),
+            apiFetch(`/parent/fees/${currentChildId}`),
+            apiFetch(`/parent/tests/${currentChildId}`)
+          ]);
+
+          updateDashboard(attendance, marks, homework, fees);
+          updateAttendanceTab(attendance);
+          updateMarksTab(marks);
+          updateTestsTab(tests);
+          updateHomeworkTab(homework);
+          updateFeesTab(fees);
+          loadQueries();
+          loadNotifications();
+        } catch (error) {
+          showToast('Failed to load data', 'error');
+        }
+      }
+
+      function updateDashboard(attendance, marks, homework, fees) {
+        document.getElementById('attendancePercent').textContent = attendance.stats.percentage + '%';
+        document.getElementById('feeStatus').textContent = fees.fee_status || 'N/A';
+
+        if (marks.overallStats) {
+          document.getElementById('overallPercent').textContent = 
+            Math.round(marks.overallStats.overall_avg || 0) + '%';
+        }
+
+        if (homework.stats) {
+          document.getElementById('homeworkDone').textContent = 
+            `${homework.stats.submitted || 0}/${homework.stats.total || 0}`;
+        }
+
+        // Draw charts
+        if (attendance.attendance.length > 0) {
+          const labels = attendance.attendance.slice(0, 10).map(a => 
+            new Date(a.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+          );
+          const values = attendance.attendance.slice(0, 10).map(a => 
+            a.status === 'present' ? 100 : a.status === 'half_day' ? 50 : 0
+          );
+
+          window.FusionCharts.createChart('attendanceChart', 'line', {
+            labels: labels.reverse(),
+            values: values.reverse()
+          });
+        }
+
+        if (marks.subjectPerformance) {
+          window.FusionCharts.createChart('subjectPerformanceChart', 'bar', {
+            labels: marks.subjectPerformance.map(s => s.subject_name),
+            values: marks.subjectPerformance.map(s => Math.round(s.avg_percentage || 0))
+          });
+        }
+
+        if (marks.monthlyTrend && marks.monthlyTrend.length > 0) {
+          window.FusionCharts.createChart('monthlyTrendChart', 'line', {
+            labels: marks.monthlyTrend.map(m => 
+              new Date(m.month).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+            ),
+            values: marks.monthlyTrend.map(m => Math.round(m.avg_percentage || 0))
+          });
+        }
+      }
+
+      function updateAttendanceTab(attendance) {
+        const tbody = document.getElementById('attendanceTableBody');
+        tbody.innerHTML = attendance.attendance.map(a => `
+          <tr>
+            <td>${new Date(a.date).toLocaleDateString()}</td>
+            <td><span class="badge-${a.status === 'present' ? 'paid' : a.status === 'absent' ? 'overdue' : 'pending'}">${a.status}</span></td>
+            <td>${a.remarks || '-'}</td>
+          </tr>
+        `).join('');
+
+        // Draw pie chart
+        if (attendance.stats.total > 0) {
+          window.FusionCharts.createChart('attendancePieChart', 'pie', {
+            labels: ['Present', 'Absent'],
+            values: [attendance.stats.present, attendance.stats.absent]
+          });
+        }
+
+        // Calendar
+        const calendar = document.getElementById('attendanceCalendar');
+        const daysInMonth = 30;
+        let calendarHTML = '';
+        for (let i = 1; i <= daysInMonth; i++) {
+          const dateStr = new Date().toISOString().split('T')[0].replace(/\d+$/, String(i).padStart(2, '0'));
+          const record = attendance.attendance.find(a => a.date === dateStr);
+          const status = record ? record.status : '';
+          calendarHTML += `<div class="calendar-day ${status}">${i}</div>`;
+        }
+        calendar.innerHTML = calendarHTML;
+      }
+
+      function updateMarksTab(marks) {
+        const tbody = document.getElementById('marksTableBody');
+        tbody.innerHTML = marks.marks.map(m => `
+          <tr>
+            <td>${m.subject_name}</td>
+            <td>${m.exam_type}</td>
+            <td>${m.marks_obtained}</td>
+            <td>${m.total_marks}</td>
+            <td>${Math.round(m.percentage)}%</td>
+            <td>${m.grade || '-'}</td>
+            <td>${new Date(m.exam_date).toLocaleDateString()}</td>
+          </tr>
+        `).join('');
+
+        if (marks.subjectPerformance) {
+          window.FusionCharts.createChart('subjectAvgChart', 'bar', {
+            labels: marks.subjectPerformance.map(s => s.subject_name),
+            values: marks.subjectPerformance.map(s => Math.round(s.avg_percentage || 0))
+          });
+
+          // Exam-wise performance
+          const examTypes = [...new Set(marks.marks.map(m => m.exam_type))];
+          const examAverages = examTypes.map(type => {
+            const typeMarks = marks.marks.filter(m => m.exam_type === type);
+            return Math.round(typeMarks.reduce((sum, m) => sum + parseFloat(m.percentage), 0) / typeMarks.length);
+          });
+
+          window.FusionCharts.createChart('examPerformanceChart', 'bar', {
+            labels: examTypes,
+            values: examAverages
+          });
+        }
+      }
+
+      function updateTestsTab(tests) {
+        const tbody = document.getElementById('testsTableBody');
+        tbody.innerHTML = tests.map(t => `
+          <tr>
+            <td>${t.test_title}</td>
+            <td>${t.subject_name}</td>
+            <td>${t.marks_obtained || '-'}</td>
+            <td>${t.total_marks || '-'}</td>
+            <td>${t.percentage ? Math.round(t.percentage) + '%' : '-'}</td>
+            <td><span class="badge-${t.percentage >= 33 ? 'paid' : 'overdue'}">${t.percentage >= 33 ? 'Passed' : 'Failed'}</span></td>
+            <td>${new Date(t.submitted_at).toLocaleDateString()}</td>
+          </tr>
+        `).join('');
+      }
+
+      function updateHomeworkTab(homework) {
+        document.getElementById('hwSubmitted').textContent = homework.stats.submitted || 0;
+        document.getElementById('hwOverdue').textContent = homework.stats.overdue || 0;
+        document.getElementById('hwPending').textContent = 
+          (homework.stats.total - homework.stats.submitted - homework.stats.overdue) || 0;
+        document.getElementById('hwAvgMarks').textContent = '-';
+
+        const tbody = document.getElementById('homeworkTableBody');
+        tbody.innerHTML = homework.homework.map(h => `
+          <tr>
+            <td>${h.title}</td>
+            <td>${h.subject_name}</td>
+            <td>${new Date(h.due_date).toLocaleDateString()}</td>
+            <td><span class="badge-${h.status === 'checked' ? 'paid' : h.status === 'submitted' ? 'pending' : 'overdue'}">${h.status || 'Not submitted'}</span></td>
+            <td>${h.marks || '-'}</td>
+          </tr>
+        `).join('');
+      }
+
+      function updateFeesTab(fees) {
+        const remaining = parseFloat(fees.fee_amount || 0) - parseFloat(fees.total_paid || 0);
+        document.getElementById('feeTotal').textContent = '₹' + (fees.fee_amount || 0);
+        document.getElementById('feePaid').textContent = '₹' + (fees.total_paid || 0);
+        document.getElementById('feeRemaining').textContent = '₹' + Math.max(0, remaining);
+        document.getElementById('feeDueDate').textContent = fees.fee_due_date ? 
+          new Date(fees.fee_due_date).toLocaleDateString() : '-';
+
+        const tbody = document.getElementById('transactionsTableBody');
+        if (fees.transactions && fees.transactions.length > 0) {
+          tbody.innerHTML = fees.transactions.map(t => `
+            <tr>
+              <td>${t.receipt || '-'}</td>
+              <td>₹${t.amount}</td>
+              <td>${t.type}</td>
+              <td>${t.method || '-'}</td>
+              <td>${new Date(t.date).toLocaleDateString()}</td>
+            </tr>
+          `).join('');
+        } else {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No transactions</td></tr>';
+        }
+      }
+
+      window.makePayment = async function() {
+        const amount = document.getElementById('paymentAmount').value;
+        if (!amount || amount <= 0) {
+          showToast('Please enter valid amount', 'warning');
+          return;
+        }
+
+        try {
+          await apiFetch('/parent/fees/pay', {
+            method: 'POST',
+            body: JSON.stringify({
+              studentId: currentChildId,
+              amount: parseFloat(amount)
+            })
+          });
+          showToast('Payment successful!', 'success');
+          loadAllData();
+        } catch (error) {
+          showToast('Payment failed', 'error');
+        }
+      };
+
+      window.sendQuery = async function() {
+        const subject = document.getElementById('querySubject').value;
+        const message = document.getElementById('queryMessage').value;
+
+        if (!message) {
+          showToast('Please enter a message', 'warning');
+          return;
+        }
+
+        try {
+          await apiFetch('/parent/queries', {
+            method: 'POST',
+            body: JSON.stringify({
+              studentId: currentChildId,
+              subject,
+              message
+            })
+          });
+          showToast('Query sent successfully!', 'success');
+          document.getElementById('querySubject').value = '';
+          document.getElementById('queryMessage').value = '';
+          loadQueries();
+        } catch (error) {
+          showToast('Failed to send query', 'error');
+        }
+      };
+
+      async function loadQueries() {
+        try {
+          const queries = await apiFetch('/parent/queries');
+          const list = document.getElementById('queriesList');
+          
+          if (queries.length === 0) {
+            list.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:20px;">No queries yet</p>';
+            return;
+          }
+
+          list.innerHTML = queries.map(q => `
+            <div style="border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <strong>${q.subject || 'General'}</strong>
+                <span style="font-size:12px;color:var(--text-secondary);">${new Date(q.created_at).toLocaleString()}</span>
+              </div>
+              <p style="margin-bottom:8px;">${q.message}</p>
+              ${q.reply ? `
+                <div style="background:var(--bg);padding:12px;border-radius:8px;border-left:3px solid var(--primary);">
+                  <p style="font-size:13px;color:var(--text-secondary);"><strong>Reply:</strong> ${q.reply}</p>
+                  ${q.replied_by_name ? `<p style="font-size:11px;color:var(--text-light);">Replied by: ${q.replied_by_name}</p>` : ''}
+                </div>
+              ` : '<p style="font-size:12px;color:#f59e0b;">Awaiting reply...</p>'}
+            </div>
+          `).join('');
+        } catch (error) {
+          // Silently fail
+        }
+      }
+
+      async function loadNotifications() {
+        try {
+          const notifications = await apiFetch('/parent/notifications');
+          const list = document.getElementById('notificationsList');
+          
+          if (notifications.length === 0) {
+            list.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:20px;">No notifications</p>';
+            return;
+          }
+
+          list.innerHTML = notifications.map(n => `
+            <div style="padding:12px;border-bottom:1px solid var(--border);${!n.is_read ? 'background:rgba(26,86,219,0.03);' : ''}">
+              <strong>${n.title}</strong>
+              <p style="font-size:13px;color:var(--text-secondary);">${n.message}</p>
+              <span style="font-size:11px;color:var(--text-light);">${new Date(n.created_at).toLocaleString()}</span>
+            </div>
+          `).join('');
+        } catch (error) {
+          // Silently fail
+        }
+      }
+
+      // Tab switching
+      document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const tab = this.dataset.tab;
+          
+          document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+          this.classList.add('active');
+          
+          document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+          const tabContent = document.getElementById(`tab-${tab}`);
+          if (tabContent) tabContent.style.display = 'block';
+        });
+      });
+
+      // Initial load
+      loadChildren();
+    });
+  </script>
+</body>
+</html>
