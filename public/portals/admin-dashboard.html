@@ -1,0 +1,175 @@
+<!-- Inside admin dashboard, the bulk marks entry section -->
+<div class="tab-content" id="tab-marks-bulk" style="display:none;">
+  <div class="content-header">
+    <h1>Bulk Marks Entry</h1>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-header">
+      <h3 class="card-title">Add Marks for Entire Class</h3>
+    </div>
+    
+    <div class="grid-3" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Select Class</label>
+        <select id="bulkClass" onchange="loadStudentsForMarks()">
+          <option value="">Select Class</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Select Subject</label>
+        <select id="bulkSubject">
+          <option value="">Select Subject</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Exam Type</label>
+        <select id="bulkExamType">
+          <option value="unit_test">Unit Test</option>
+          <option value="half_yearly">Half Yearly</option>
+          <option value="final">Final Exam</option>
+          <option value="weekly">Weekly Test</option>
+          <option value="monthly">Monthly Test</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Total Marks</label>
+      <input type="number" id="bulkTotalMarks" placeholder="e.g., 100" value="100" style="width:200px;">
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="bulk-marks-table" id="bulkMarksTable">
+        <thead>
+          <tr>
+            <th>Roll No.</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Marks Obtained</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="bulkMarksBody">
+          <tr><td colspan="6" style="text-align:center;padding:20px;">Select class to load students</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:20px;display:flex;gap:12px;">
+      <button class="btn btn-primary" onclick="submitBulkMarks()">
+        <i class="fas fa-save"></i> Save All Marks
+      </button>
+      <button class="btn btn-outline" onclick="autoFillPercentage()">
+        <i class="fas fa-calculator"></i> Auto Calculate %
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function loadStudentsForMarks() {
+    const className = document.getElementById('bulkClass').value;
+    if (!className) return;
+
+    const { apiFetch } = window.FusionPortal;
+    
+    try {
+      const students = await apiFetch(`/admin/students?class=${className}&limit=200`);
+      const totalMarks = document.getElementById('bulkTotalMarks').value || 100;
+
+      const tbody = document.getElementById('bulkMarksBody');
+      tbody.innerHTML = students.students.map(s => `
+        <tr>
+          <td>${s.roll_number || '-'}</td>
+          <td>${s.student_id}</td>
+          <td>${s.full_name}</td>
+          <td><input type="number" class="marks-input" data-student-id="${s.id}" 
+               min="0" max="${totalMarks}" step="0.5" onchange="updatePercentage(this, ${totalMarks})"></td>
+          <td><span class="calc-percent" id="percent-${s.id}">-</span></td>
+          <td><span class="calc-grade" id="grade-${s.id}">-</span></td>
+        </tr>
+      `).join('');
+    } catch (error) {
+      alert('Failed to load students: ' + error.message);
+    }
+  }
+
+  function updatePercentage(input, totalMarks) {
+    const studentId = input.dataset.studentId;
+    const marks = parseFloat(input.value) || 0;
+    const percent = ((marks / totalMarks) * 100).toFixed(1);
+    
+    document.getElementById(`percent-${studentId}`).textContent = percent + '%';
+    
+    let grade = 'F';
+    if (percent >= 90) grade = 'A+';
+    else if (percent >= 80) grade = 'A';
+    else if (percent >= 70) grade = 'B+';
+    else if (percent >= 60) grade = 'B';
+    else if (percent >= 50) grade = 'C';
+    else if (percent >= 40) grade = 'D';
+    
+    document.getElementById(`grade-${studentId}`).textContent = grade;
+  }
+
+  function autoFillPercentage() {
+    document.querySelectorAll('.marks-input').forEach(input => {
+      if (input.value) {
+        const totalMarks = document.getElementById('bulkTotalMarks').value || 100;
+        updatePercentage(input, totalMarks);
+      }
+    });
+  }
+
+  async function submitBulkMarks() {
+    const className = document.getElementById('bulkClass').value;
+    const subjectId = document.getElementById('bulkSubject').value;
+    const examType = document.getElementById('bulkExamType').value;
+    const totalMarks = parseFloat(document.getElementById('bulkTotalMarks').value) || 100;
+
+    if (!className || !subjectId) {
+      alert('Please select class and subject');
+      return;
+    }
+
+    const marksData = [];
+    document.querySelectorAll('.marks-input').forEach(input => {
+      if (input.value) {
+        marksData.push({
+          studentId: input.dataset.studentId,
+          marksObtained: parseFloat(input.value),
+          totalMarks: totalMarks
+        });
+      }
+    });
+
+    if (marksData.length === 0) {
+      alert('Please enter marks for at least one student');
+      return;
+    }
+
+    const { apiFetch, showToast } = window.FusionPortal;
+
+    try {
+      await apiFetch('/admin/marks/bulk', {
+        method: 'POST',
+        body: JSON.stringify({
+          class: className,
+          subjectId,
+          examType,
+          marksData
+        })
+      });
+
+      showToast(`Marks saved for ${marksData.length} students!`, 'success');
+    } catch (error) {
+      showToast('Failed to save marks: ' + error.message, 'error');
+    }
+  }
+</script>
