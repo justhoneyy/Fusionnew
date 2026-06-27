@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fusion Coaching - Premier Science & Commerce Coaching Institute. JEE, NEET, Foundation Courses. 5000+ Students, 95% Success Rate, 10+ Years of Excellence.">
+  <meta name="keywords" content="Fusion Coaching, Science Coaching, Commerce Coaching, JEE, NEET, Best Coaching Institute, Physics, Chemistry, Mathematics">
+  <meta name="author" content="Fusion Coaching">
+  <meta property="og:title" content="Fusion Coaching - Building the Future of Science Education">
+  <meta property="og:description" content="Premier Science & Commerce Coaching Institute with 5000+ Students and 95% Success Rate.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fusioncoaching.in">
+  <meta name="theme-color" content="#1a56db">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Fusion Coaching | Premier Science & Commerce Institute</title>
+  <style>
+    :root {
+      --primary: #1a56db; --primary-dark: #0f3a8a; --primary-light: #3b82f6;
+      --primary-gradient: linear-gradient(135deg, #1a56db 0%, #3b82f6 100%);
+      --secondary: #0ea5e9; --accent: #06b6d4; --gold: #f59e0b; --success: #10b981; --danger: #ef4444;
+      --bg: #ffffff; --bg-alt: #f8fafc; --bg-card: #ffffff;
+      --bg-glass: rgba(255,255,255,0.8);
+      --text: #0f172a; --text-secondary: #475569; --text-light: #94a3b8; --border: #e2e8f0;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06); --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
+      --radius: 12px; --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1); --transition-slow: 0.6s cubic-bezier(0.4,0,0.2,1);
+      --font: 'Inter', sans-serif; --font-heading: 'Poppins', 'Inter', sans-serif;
+      --max-width: 1200px; --header-height: 72px;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1120; --bg-alt: #111827; --bg-card: #1e293b;
+      --bg-glass: rgba(30,41,59,0.8);
+      --text: #f1f5f9; --text-secondary: #94a3b8; --text-light: #64748b; --border: #1e293b;
+      --shadow: 0 4px 20px rgba(0,0,0,0.4); --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
+      --primary: #3b82f6; --primary-dark: #1d4ed8; --primary-light: #60a5fa;
+      --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;transition:background var(--transition-slow),color var(--transition-slow)}
+    a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block}
+    button{cursor:pointer;font-family:inherit;border:none;background:none}
+    input,textarea,select{font-family:inherit}
+    ::selection{background:var(--primary);color:#fff}
+    :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-alt)}::-webkit-scrollbar-thumb{background:var(--text-light);border-radius:4px}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 24px}
+    .section{padding:100px 0}
+    .section-title{text-align:center;margin-bottom:60px}
+    .section-title h2{font-family:var(--font-heading);font-size:clamp(28px,4vw,44px);font-weight:700;margin-bottom:16px;position:relative;display:inline-block}
+    .section-title h2::after{content:'';display:block;width:60px;height:4px;background:var(--primary-gradient);border-radius:2px;margin:12px auto 0}
+    .section-title p{color:var(--text-secondary);font-size:clamp(15px,1.2vw,18px);max-width:600px;margin:0 auto}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 32px;border-radius:50px;font-weight:600;font-size:15px;transition:all var(--transition);position:relative;overflow:hidden;white-space:nowrap}
+    .btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-100%);transition:transform 0.4s}
+    .btn:hover::after{transform:translateX(0)}
+    .btn-primary{background:var(--primary-gradient);color:#fff;box-shadow:0 4px 15px rgba(26,86,219,0.35)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,86,219,0.45)}
+    .btn-outline{border:2px solid var(--primary);color:var(--primary);background:transparent}
+    .btn-outline:hover{background:var(--primary);color:#fff;transform:translateY(-2px)}
+    
+    #loader{
+      position:fixed;top:0;left:0;width:100%;height:100vh;display:flex;
+      align-items:center;justify-content:center;padding:20px;background:var(--bg);z-index:10000;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .loader-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:320px;text-align:center;margin:auto}
+    .loader-logo{font-family:var(--font-heading);font-size:36px;font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .loader-bar{width:200px;height:3px;background:var(--border);border-radius:2px;margin:20px auto 0;overflow:hidden}
+    .loader-bar-fill{height:100%;width:0;background:var(--primary-gradient);border-radius:2px;animation:loadFill 1.8s ease-in-out forwards}
+    @keyframes loadFill{0%{width:0}100%{width:100%}}
+    
+    .navbar{position:sticky;top:0;z-index:1000;background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:background var(--transition-slow),border-color var(--transition-slow);height:var(--header-height)}
+    .navbar.scrolled{box-shadow:0 2px 30px rgba(0,0,0,0.08)}
+    [data-theme="dark"] .navbar.scrolled{box-shadow:0 2px 30px rgba(0,0,0,0.3)}
+    .navbar .container{display:flex;align-items:center;justify-content:space-between;height:100%}
+    .nav-logo{font-family:var(--font-heading);font-size:24px;font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:8px;animation:logoGlow 3s ease-in-out infinite}
+    @keyframes logoGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+    .nav-logo span{font-weight:300;font-size:14px;-webkit-text-fill-color:var(--text-secondary);color:var(--text-secondary);background:none}
+    .nav-links{display:flex;align-items:center;gap:6px}
+    .nav-links a{padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text-secondary);transition:all var(--transition);position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:60%;height:2px;background:var(--primary);border-radius:1px;transition:transform var(--transition)}
+    .nav-links a:hover::after,.nav-links a.active::after{transform:translateX(-50%) scaleX(1)}
+    .nav-links a:hover,.nav-links a.active{color:var(--primary)}
+    .nav-links .btn{padding:10px 24px;font-size:14px;margin-left:8px}
+    .nav-links .portal-btn{background:var(--bg-alt);border:2px solid var(--border);color:var(--text);font-weight:600;padding:10px 20px;border-radius:50px;font-size:13px;transition:all var(--transition);display:inline-flex;align-items:center;gap:6px}
+    .nav-links .portal-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-2px)}
+    .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;z-index:1001}
+    .nav-toggle span{display:block;width:26px;height:2px;background:var(--text);border-radius:2px;transition:all var(--transition)}
+    .nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .nav-toggle.active span:nth-child(2){opacity:0}
+    .nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    
+    .mobile-menu{position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--bg);z-index:999;padding:90px 24px 24px;box-shadow:var(--shadow-lg);transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;gap:10px}
+    .mobile-menu.open{transform:translateX(0)}
+    .mobile-menu a{display:block;padding:12px 16px;font-size:16px;font-weight:500;color:var(--text);border-radius:12px;transition:all var(--transition)}
+    .mobile-menu a:hover{background:var(--bg-alt);color:var(--primary)}
+    
+    .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg);padding:120px 0 80px}
+    .hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(26,86,219,0.08) 0%,transparent 70%);border-radius:50%;animation:blobFloat 20s ease-in-out infinite;pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-10%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,0.06) 0%,transparent 70%);border-radius:50%;animation:blobFloat 25s ease-in-out infinite reverse;pointer-events:none}
+    @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(0.95)}}
+    .hero .container{display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center;position:relative;z-index:1}
+    
+    .hero-content h1{font-family:var(--font-heading);font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.2;margin-bottom:20px}
+    .hero-content h1 .line1{display:block;animation:fadeInUp 1s ease-out both;color:var(--text)}
+    .hero-content h1 .line2{display:block;margin-top:5px;min-height:1.2em}
+    
+    #changing-text {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 800;
+      position: relative;
+    }
+    
+    .typewriter-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      background-color: var(--primary);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: cursorBlink 0.75s step-end infinite;
+    }
+    
+    @keyframes cursorBlink {
+      from, to { background-color: transparent }
+      50% { background-color: var(--primary); }
+    }
+    
+    @keyframes fadeInUp{0%{opacity:0;transform:translateY(35px)}100%{opacity:1;transform:translateY(0)}}
+    .hero-content p{font-size:clamp(15px,1.2vw,18px);color:var(--text-secondary);max-width:560px;margin-bottom:36px;line-height:1.8;animation:fadeInUp 1s ease-out 0.4s both}
+    .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;animation:fadeInUp 1s ease-out 0.6s both}
+    
+    .hero-contact-banner{display:flex;flex-wrap:wrap;gap:16px 24px;margin-top:40px;padding:18px 24px;background:var(--bg-glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);animation:fadeInUp 1s ease-out 0.8s both}
+    .hero-contact-banner .hcb-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);font-weight:500}
+    .hero-contact-banner .hcb-item i{width:36px;height:36px;border-radius:10px;background:var(--primary-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .hero-contact-banner .hcb-item span{color:var(--text-secondary);font-weight:400}
+    
+    .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;animation:fadeInUp 1s ease-out 1s both}
+    .hero-stat{text-align:center;padding:16px 12px;background:var(--bg-glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);transition:all var(--transition)}
+    .hero-stat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .hero-stat .number{font-family:var(--font-heading);font-size:clamp(22px,2.5vw,32px);font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-stat .label{font-size:12px;color:var(--text-secondary);font-weight:500;margin-top:4px}
+    
+    .hero-visual{display:flex;justify-content:center;align-items:center;position:relative;animation:fadeInRight 1.2s ease-out}
+    @keyframes fadeInRight{0%{opacity:0;transform:translateX(40px)}100%{opacity:1;transform:translateX(0)}}
+    .hero-illustration{width:100%;max-width:460px;aspect-ratio:1/0.9}
+    .hero-illustration svg{width:100%;height:100%}
+    
+    .particles{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .particle{position:absolute;user-select:none;pointer-events:none;opacity:0.08;color:var(--primary);font-family:var(--font-heading);font-weight:600;animation:particleFloat linear infinite}
+    @keyframes particleFloat{0%{transform:translateY(105vh) rotate(0deg);opacity:0}10%{opacity:0.12}90%{opacity:0.12}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+    
+    .courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+    .course-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;transition:all var(--transition);position:relative;overflow:hidden}
+    .course-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--primary-gradient);transform:scaleX(0);transform-origin:left;transition:transform var(--transition)}
+    .course-card:hover::before{transform:scaleX(1)}
+    .course-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--primary-light)}
+    .course-icon{width:52px;height:52px;border-radius:14px;background:rgba(26,86,219,0.06);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--primary);margin-bottom:18px;transition:all var(--transition)}
+    .course-card:hover .course-icon{background:var(--primary-gradient);color:#fff;transform:rotateY(180deg)}
+    .course-card h3{font-family:var(--font-heading);font-size:18px;font-weight:600;margin-bottom:8px}
+    .course-card p{color:var(--text-secondary);font-size:14px;line-height:1.7}
+    .course-tag{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:14px}
+    .tag-science{background:rgba(26,86,219,0.08);color:var(--primary)}
+    .tag-commerce{background:rgba(245,158,11,0.08);color:var(--gold)}
+    .course-category-title{font-family:var(--font-heading);font-size:22px;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+    .course-category-title i{color:var(--primary)}
+    
+    .faculty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+    .faculty-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 24px;text-align:center;transition:all var(--transition)}
+    .faculty-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .faculty-img{width:100px;height:100px;border-radius:50%;margin:0 auto 18px;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;transition:transform var(--transition)}
+    .faculty-card:hover .faculty-img{transform:scale(1.08) rotate(4deg)}
+    .faculty-card h3{font-size:20px;font-weight:600;margin-bottom:4px}
+    .faculty-card .role{color:var(--primary);font-weight:600;font-size:14px;margin-bottom:14px}
+    .faculty-card .details{font-size:13px;color:var(--text-secondary);line-height:1.8;text-align:left;display:inline-block;margin:0 auto}
+    .faculty-card .details span{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+    
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+    .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 20px;text-align:center;transition:all var(--transition);position:relative;overflow:hidden}
+    .feature-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--primary-gradient);transform:scaleX(0);transition:transform var(--transition)}
+    .feature-card:hover::after{transform:scaleX(1)}
+    .feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .feature-icon{width:56px;height:56px;border-radius:16px;background:rgba(26,86,219,0.06);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--primary);margin:0 auto 16px;transition:all var(--transition)}
+    .feature-card:hover .feature-icon{background:var(--primary-gradient);color:#fff;transform:scale(1.05) rotate(-5deg)}
+    .feature-card h3{font-size:17px;font-weight:600;margin-bottom:8px}
+    .feature-card p{font-size:13px;color:var(--text-secondary)}
+    
+    .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+    .result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 20px;text-align:center;transition:all var(--transition)}
+    .result-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .result-card .rank{font-family:var(--font-heading);font-size:32px;font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .result-card .percent{display:inline-block;padding:4px 16px;border-radius:20px;background:rgba(16,185,129,0.08);color:var(--success);font-weight:700;font-size:13px;margin:8px 0 12px}
+    .result-card h4{font-size:18px;font-weight:600}
+    .result-card .detail{font-size:13px;color:var(--text-secondary);margin-top:4px}
+    
+    .testimonials-carousel{position:relative;overflow:hidden;padding-bottom:10px}
+    .testimonials-track{display:flex;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)}
+    .testimonial-slide{min-width:100%;padding:10px}
+    .testimonial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 32px;max-width:700px;margin:0 auto;text-align:center}
+    .testimonial-stars{color:var(--gold);font-size:18px;margin-bottom:16px}
+    .testimonial-card blockquote{font-size:16px;color:var(--text-secondary);line-height:1.8;font-style:italic;margin-bottom:20px}
+    .testimonial-author{display:flex;align-items:center;justify-content:center;gap:14px}
+    .testimonial-avatar{width:50px;height:50px;border-radius:50%;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+    .testimonial-author-info h4{font-size:16px;font-weight:600}
+    .testimonial-author-info span{font-size:13px;color:var(--text-light)}
+    .carousel-controls{display:flex;justify-content:center;gap:12px;margin-top:24px}
+    .carousel-controls button{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text);display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+    .carousel-controls button:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+    .carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all var(--transition);cursor:pointer}
+    .carousel-dot.active{background:var(--primary);width:28px;border-radius:5px}
+    
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+    .gallery-item{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;background:var(--bg-alt);cursor:pointer;transition:all var(--transition)}
+    .gallery-item:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
+    .gallery-item svg{width:100%;height:100%;transition:transform 0.6s}
+    .gallery-item:hover svg{transform:scale(1.05)}
+    .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);display:flex;align-items:flex-end;padding:20px;opacity:0;transition:opacity var(--transition)}
+    .gallery-item:hover .gallery-overlay{opacity:1}
+    .gallery-overlay span{color:#fff;font-weight:500;font-size:14px}
+    
+    .timeline{position:relative;max-width:800px;margin:0 auto;padding:20px 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:var(--border);transform:translateX(-50%)}
+    .timeline-item{display:flex;align-items:flex-start;margin-bottom:48px;position:relative}
+    .timeline-item:nth-child(odd){flex-direction:row-reverse}
+    .timeline-item .step-num{position:absolute;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:var(--primary-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;z-index:2;box-shadow:0 4px 15px rgba(26,86,219,0.33)}
+    .timeline-item:hover .step-num{transform:translateX(-50%) scale(1.1)}
+    .timeline-item .content{width:calc(50% - 40px);padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:all var(--transition)}
+    .timeline-item .content:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+    .timeline-item .content h3{font-size:18px;font-weight:600;margin-bottom:6px}
+    .timeline-item .content p{font-size:14px;color:var(--text-secondary)}
+    
+    .faq-list{max-width:760px;margin:0 auto}
+    .faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:var(--bg-card);transition:all var(--transition)}
+    .faq-item.open{border-color:var(--primary);box-shadow:0 0 0 2px rgba(26,86,219,0.06)}
+    .faq-question{width:100%;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:500;color:var(--text);background:none;text-align:left;cursor:pointer}
+    .faq-question i{font-size:14px;color:var(--primary);transition:transform var(--transition)}
+    .faq-item.open .faq-question i{transform:rotate(180deg)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1),padding 0.4s}
+    .faq-item.open .faq-answer{max-height:300px;padding:0 24px 20px}
+    .faq-answer p{font-size:14px;color:var(--text-secondary);line-height:1.8}
+    
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+    .contact-form{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px}
+    .contact-form h3{font-family:var(--font-heading);font-size:22px;font-weight:600;margin-bottom:24px}
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text)}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px;transition:border-color var(--transition),box-shadow var(--transition)}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,86,219,0.1);outline:none}
+    .form-group textarea{resize:vertical;min-height:120px}
+    .form-group .error{color:var(--danger);font-size:12px;margin-top:4px;display:none}
+    .form-group.error input,.form-group.error textarea{border-color:var(--danger)}
+    .form-group.error .error{display:block}
+    .form-success{display:none;padding:16px;background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:8px;color:var(--success);font-weight:500;font-size:14px;margin-top:16px}
+    
+    .contact-info{display:flex;flex-direction:column;gap:20px}
+    .contact-info-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;align-items:flex-start;gap:16px;transition:all var(--transition)}
+    .contact-info-card:hover{box-shadow:var(--shadow);transform:translateX(4px)}
+    .contact-info-card i{width:44px;height:44px;border-radius:12px;background:rgba(26,86,219,0.06);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--primary);flex-shrink:0}
+    .contact-info-card h4{font-size:15px;font-weight:600;margin-bottom:4px}
+    .contact-info-card p{font-size:14px;color:var(--text-secondary)}
+    .contact-map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);height:220px;background:var(--bg-alt)}
+    .contact-map iframe{width:100%;height:100%;border:none}
+    
+    .footer{background:var(--primary-dark);color:#fff;padding:60px 0 0;transition:background var(--transition-slow)}
+    [data-theme="dark"] .footer{background:#081022}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:40px;margin-bottom:40px}
+    .footer-brand h2{font-family:var(--font-heading);font-size:28px;font-weight:800;margin-bottom:16px}
+    .footer-brand p{font-size:14px;opacity:0.8;line-height:1.8;max-width:320px}
+    .footer h3{font-size:18px;font-weight:600;margin-bottom:20px;position:relative;padding-bottom:12px}
+    .footer h3::after{content:'';position:absolute;bottom:0;left:0;width:30px;height:3px;background:var(--primary-light);border-radius:2px}
+    .footer-links a{display:block;padding:6px 0;font-size:14px;opacity:0.75;transition:all var(--transition)}
+    .footer-links a:hover{opacity:1;padding-left:8px}
+    .footer-contact p{display:flex;align-items:center;gap:10px;font-size:14px;opacity:0.8;margin-bottom:12px}
+    .footer-contact p i{width:16px}
+    .footer-social{display:flex;gap:12px;margin-top:20px}
+    .footer-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all var(--transition)}
+    .footer-social a:hover{background:var(--primary);transform:translateY(-3px)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;opacity:0.7}
+    
+    .scroll-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;background:var(--primary-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 15px rgba(26,86,219,0.35);z-index:999;opacity:0;visibility:hidden;transform:translateY(20px);transition:all var(--transition)}
+    .scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+    .scroll-top:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(26,86,219,0.45)}
+    .ripple{position:relative;overflow:hidden}
+    .ripple-effect{position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:rippleAnim 0.6s linear;pointer-events:none}
+    @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+    
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.8s,transform 0.8s}
+    .reveal-left.visible{opacity:1;transform:translateX(0)}
+    .reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.8s,transform 0.8s}
+    .reveal-right.visible{opacity:1;transform:translateX(0)}
+    
+    @media(max-width:1024px){
+      .hero .container{grid-template-columns:1fr;gap:40px;text-align:center}
+      .hero-content p{margin-left:auto;margin-right:auto}
+      .hero-buttons{justify-content:center}
+      .hero-contact-banner{justify-content:center}
+      .hero-visual{display:none}
+      .hero-stats{grid-template-columns:repeat(4,1fr)}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .nav-toggle{display:flex}
+      .section{padding:60px 0}
+      .hero{padding:100px 0 40px;min-height:auto}
+      .hero-stats{grid-template-columns:repeat(2,1fr);gap:12px}
+      .hero-stat{padding:14px 8px}
+      .hero-contact-banner{flex-direction:column;gap:12px;padding:16px 20px;align-items:flex-start}
+      .courses-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+      .faculty-grid, .features-grid, .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;text-align:center}
+      .contact-form{padding:28px 20px}
+      .testimonial-card{padding:28px 20px}
+      .timeline::before{left:16px}
+      .timeline-item, .timeline-item:nth-child(odd){flex-direction:row}
+      .timeline-item .step-num{left:16px;transform:translateX(-50%)}
+      .timeline-item:hover .step-num{transform:translateX(-50%) scale(1.1)}
+      .timeline-item .content{width:calc(100% - 48px);margin-left:36px}
+      .loader-content{max-width:260px}
+      .loader-logo{font-size:28px}
+      .loader-bar{width:170px;margin:18px auto 0}
+    }
+    @media(max-width:480px){
+      .container{padding:0 16px}
+      .courses-grid, .faculty-grid, .features-grid, .gallery-grid{grid-template-columns:1fr}
+      .hero-buttons .btn{width:100%}
+      .hero-stats{grid-template-columns:1fr;gap:10px}
+      .hero-contact-banner{align-items:center}
+      .section-title h2{font-size:24px}
+      .loader-logo{font-size:24px}
+      .loader-bar{width:140px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+      html{scroll-behavior:auto}
+    }
+    .skip-link{position:absolute;top:-100%;left:16px;padding:12px 20px;background:var(--primary);color:#fff;border-radius:0 0 8px 8px;z-index:10001;font-weight:600}
+    .skip-link:focus{top:0}
+    body,.navbar,.footer,.mobile-menu,.course-card,.faculty-card,.feature-card,.result-card,.testimonial-card,.contact-form,.contact-info-card,.faq-item,.timeline-item .content,.hero-stat,.hero-contact-banner{transition:background-color var(--transition-slow),color var(--transition-slow),border-color var(--transition-slow),box-shadow var(--transition-slow)}
+  </style>
+</head>
+<body>
+  <a href="#home" class="skip-link">Skip to main content</a>
+  <div id="loader" role="status" aria-label="Loading">
+    <div class="loader-content">
+      <div class="loader-logo">Fusion Coaching</div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+  </div>
+  
+  <div class="particles" id="particles" aria-hidden="true"></div>
+  
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="#home" class="nav-logo">Fusion <span>Coaching</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a><a href="#about">About</a><a href="#courses">Courses</a><a href="#faculty">Faculty</a><a href="#results">Results</a><a href="#testimonials">Testimonials</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+        <button class="btn btn-primary ripple" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+        <a href="/portals/login.html" class="portal-btn ripple"><i class="fas fa-sign-in-alt"></i> Portal Login</a>
+        <button class="theme-toggle-topbar" id="themeToggleTopbar" aria-label="Toggle dark mode" style="background:none;border:none;color:var(--text-secondary);font-size:18px;padding:8px;cursor:pointer;border-radius:8px;transition:all var(--transition)"><i class="fas fa-moon" id="themeIconTopbar"></i></button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#home" onclick="closeMobileMenu()">Home</a><a href="#about" onclick="closeMobileMenu()">About</a><a href="#courses" onclick="closeMobileMenu()">Courses</a><a href="#faculty" onclick="closeMobileMenu()">Faculty</a><a href="#results" onclick="closeMobileMenu()">Results</a><a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a><a href="#gallery" onclick="closeMobileMenu()">Gallery</a><a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="/portals/login.html" style="background:var(--primary);color:#fff;text-align:center;border-radius:50px;margin-top:8px;font-weight:600;"><i class="fas fa-sign-in-alt"></i> Portal Login</a>
+    <div style="display:flex;gap:12px;margin-top:16px;align-items:center;padding:0 16px;">
+      <button class="btn btn-primary ripple" style="flex:1;" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'});closeMobileMenu();"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+      <button class="theme-toggle-topbar" id="themeToggleMobile" aria-label="Toggle dark mode" style="background:var(--bg-alt);border:none;color:var(--text);font-size:18px;padding:12px;cursor:pointer;border-radius:12px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;"><i class="fas fa-moon" id="themeIconMobile"></i></button>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1>
+            <span class="line1">Building the Future of</span>
+            <span class="line2"><span id="changing-text">Science Education</span><span class="typewriter-cursor"></span></span>
+          </h1>
+          <p>Fusion Coaching is dedicated to shaping bright minds through exceptional science and commerce education. With expert faculty, proven results, and a student-first approach, we prepare you for JEE, NEET, board exams, and beyond.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary ripple" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})">Enroll Now <i class="fas fa-arrow-right"></i></button>
+            <button class="btn btn-outline ripple" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Explore Courses <i class="fas fa-book-open"></i></button>
+          </div>
+          <div class="hero-contact-banner">
+            <div class="hcb-item"><i class="fas fa-phone-alt"></i> +91 87005 17172 <span>| Call Now</span></div>
+            <div class="hcb-item"><i class="fas fa-map-marker-alt"></i> E2/005 Bharat City, Near Teela Mod</div>
+            <div class="hcb-item"><i class="far fa-clock"></i> Mon-Sat: 6AM - 8PM</div>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="5000">0</span>+</div><div class="label">Students</div></div>
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="95">0</span>%</div><div class="label">Success Rate</div></div>
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="10">0</span>+</div><div class="label">Years of Excellence</div></div>
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="1000">0</span>+</div><div class="label">Selections</div></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-illustration">
+            <svg viewBox="0 0 500 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a56db"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.2"/><stop offset="100%" stop-color="#1a56db" stop-opacity="0.05"/></linearGradient></defs>
+              <circle cx="250" cy="230" r="180" fill="url(#g2)"/><circle cx="250" cy="230" r="120" fill="url(#g2)"/>
+              <rect x="150" y="140" width="200" height="160" rx="12" fill="url(#g1)" opacity="0.1"/>
+              <rect x="165" y="160" width="170" height="8" rx="4" fill="url(#g1)" opacity="0.3"/>
+              <rect x="165" y="180" width="140" height="8" rx="4" fill="url(#g1)" opacity="0.2"/>
+              <rect x="165" y="200" width="155" height="8" rx="4" fill="url(#g1)" opacity="0.2"/>
+              <rect x="165" y="220" width="120" height="8" rx="4" fill="url(#g1)" opacity="0.15"/>
+              <polygon points="250,120 180,160 250,150 320,160" fill="url(#g1)" opacity="0.8"/>
+              <rect x="240" y="140" width="20" height="30" rx="3" fill="url(#g1)" opacity="0.6"/>
+              <circle cx="250" cy="130" r="6" fill="#f59e0b"/>
+              <ellipse cx="380" cy="130" rx="50" ry="16" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3"/>
+              <ellipse cx="380" cy="130" rx="50" ry="16" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3" transform="rotate(60,380,130)"/>
+              <ellipse cx="380" cy="130" rx="50" ry="16" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3" transform="rotate(-60,380,130)"/>
+              <circle cx="380" cy="130" r="4" fill="url(#g1)" opacity="0.6"/>
+              <circle cx="120" cy="300" r="20" fill="url(#g1)" opacity="0.08"/>
+              <circle cx="400" cy="320" r="30" fill="url(#g1)" opacity="0.06"/>
+              <rect x="130" y="330" width="240" height="3" rx="1.5" fill="url(#g1)" opacity="0.1"/>
+              <text x="310" y="270" font-family="serif" font-size="36" font-style="italic" fill="url(#g1)" opacity="0.15">π</text>
+              <text x="180" y="270" font-family="sans-serif" font-size="14" font-weight="600" fill="url(#g1)" opacity="0.2">E=mc²</text>
+              <rect x="390" y="210" width="60" height="80" rx="6" fill="url(#g1)" opacity="0.1"/>
+              <rect x="395" y="250" width="12" height="35" rx="2" fill="url(#g1)" opacity="0.3"/>
+              <rect x="412" y="235" width="12" height="50" rx="2" fill="url(#g1)" opacity="0.2"/>
+              <rect x="429" y="245" width="12" height="40" rx="2" fill="url(#g1)" opacity="0.25"/>
+              <circle cx="140" cy="180" r="12" fill="url(#g1)" opacity="0.12"/>
+              <rect x="130" y="192" width="20" height="30" rx="4" fill="url(#g1)" opacity="0.08"/>
+              <circle cx="370" cy="180" r="12" fill="url(#g1)" opacity="0.12"/>
+              <rect x="360" y="192" width="20" height="30" rx="4" fill="url(#g1)" opacity="0.08"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal"><h2>About Fusion Coaching</h2><p>Shaping futures through academic excellence since 2016</p></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;" class="contact-grid">
+          <div class="reveal-left">
+            <div style="border-radius:var(--radius-lg);overflow:hidden;background:var(--primary-gradient);padding:4px;">
+              <div style="border-radius:calc(var(--radius-lg) - 4px);overflow:hidden;background:var(--bg);padding:30px;">
+                <svg viewBox="0 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+                  <defs><linearGradient id="a1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a56db"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+                  <rect x="40" y="60" width="200" height="220" rx="16" fill="url(#a1)" opacity="0.08"/>
+                  <rect x="260" y="60" width="200" height="220" rx="16" fill="url(#a1)" opacity="0.06"/>
+                  <rect x="100" y="100" width="80" height="140" rx="6" fill="url(#a1)" opacity="0.15"/>
+                  <rect x="110" y="110" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/>
+                  <rect x="150" y="110" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/>
+                  <rect x="110" y="145" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/>
+                  <rect x="150" y="145" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/>
+                  <rect x="110" y="180" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/>
+                  <rect x="150" y="180" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/>
+                  <rect x="125" y="215" width="30" height="25" rx="4" fill="url(#a1)" opacity="0.3"/>
+                  <text x="140" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="url(#a1)" opacity="0.4">Fusion</text>
+                  <circle cx="320" cy="140" r="18" fill="url(#a1)" opacity="0.12"/>
+                  <rect x="304" y="158" width="32" height="40" rx="6" fill="url(#a1)" opacity="0.08"/>
+                  <circle cx="370" cy="140" r="18" fill="url(#a1)" opacity="0.12"/>
+                  <rect x="354" y="158" width="32" height="40" rx="6" fill="url(#a1)" opacity="0.08"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-right">
+            <h3 style="font-family:var(--font-heading);font-size:24px;font-weight:700;margin-bottom:16px;">Premier Science & Commerce Institute</h3>
+            <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.8;">Fusion Coaching has been a beacon of academic excellence since 2016, empowering thousands of students to achieve their dreams. Our holistic approach combines expert faculty, personalized attention, and a proven curriculum.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Expert Faculty</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Small Batches</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Digital Study Material</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Weekly Tests</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Doubt Sessions</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Career Guidance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="courses">
+      <div class="container">
+        <div class="section-title reveal"><h2>Our Courses</h2><p>Comprehensive programs designed for academic excellence</p></div>
+        <div class="reveal" style="margin-bottom:40px;">
+          <div class="course-category-title"><i class="fas fa-flask"></i> Science Courses</div>
+          <div class="courses-grid">
+            <div class="course-card"><div class="course-icon"><i class="fas fa-atom"></i></div><h3>Class 9 Science Foundation</h3><p>Build a strong foundation in Physics, Chemistry, and Mathematics.</p><span class="course-tag tag-science">Foundation</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-microscope"></i></div><h3>Class 10 Science</h3><p>Excel in board exams with comprehensive Science and Math coverage.</p><span class="course-tag tag-science">Board Focus</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-square-root-alt"></i></div><h3>Class 11 PCM</h3><p>Master Physics, Chemistry, and Mathematics for JEE preparation.</p><span class="course-tag tag-science">PCM</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-rocket"></i></div><h3>Class 12 PCM</h3><p>Advanced preparation for board exams and competitive tests.</p><span class="course-tag tag-science">PCM</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-bolt"></i></div><h3>Physics</h3><p>In-depth physics from fundamentals to advanced problem-solving.</p><span class="course-tag tag-science">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-flask"></i></div><h3>Chemistry</h3><p>Comprehensive chemistry covering physical, organic, and inorganic.</p><span class="course-tag tag-science">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-calculator"></i></div><h3>Mathematics</h3><p>Build mathematical excellence with rigorous practice.</p><span class="course-tag tag-science">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-trophy"></i></div><h3>JEE Foundation</h3><p>Targeted preparation for JEE Main & Advanced.</p><span class="course-tag tag-science">Competitive</span></div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="course-category-title"><i class="fas fa-chart-line"></i> Commerce Courses</div>
+          <div class="courses-grid">
+            <div class="course-card"><div class="course-icon"><i class="fas fa-briefcase"></i></div><h3>Class 11 Commerce</h3><p>Build your foundation in Accounts, Economics, and Business Studies.</p><span class="course-tag tag-commerce">Commerce</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-chart-bar"></i></div><h3>Class 12 Commerce</h3><p>Excel in board exams with comprehensive commerce curriculum.</p><span class="course-tag tag-commerce">Commerce</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-book"></i></div><h3>Accounts</h3><p>Master financial accounting principles with practical problem-solving.</p><span class="course-tag tag-commerce">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-globe"></i></div><h3>Economics</h3><p>Understand micro and macro economics through real-world applications.</p><span class="course-tag tag-commerce">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-handshake"></i></div><h3>Business Studies</h3><p>Learn business principles, management, and organizational strategies.</p><span class="course-tag tag-commerce">Subject</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faculty" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Our Expert Faculty</h2>
+          <p>Learn from the brightest minds in education</p>
+        </div>
+        <div class="faculty-grid">
+          <div class="faculty-card reveal">
+            <div class="faculty-img"><i class="fas fa-user-tie"></i></div>
+            <h3>Aakash Sir</h3>
+            <div class="role">Senior Physics Faculty</div>
+            <div class="details">
+              <span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Sc. Physics, IIT Delhi</span>
+              <span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 12+ Years Experience</span>
+              <span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Mechanics</span>
+            </div>
+          </div>
+          <div class="faculty-card reveal">
+            <div class="faculty-img"><i class="fas fa-user-graduate"></i></div>
+            <h3>Pradeep Sir</h3>
+            <div class="role">Senior Mathematics Faculty</div>
+            <div class="details">
+              <span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Sc. Mathematics, IIT BHU</span>
+              <span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 10+ Years Experience</span>
+              <span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Calculus & Algebra</span>
+            </div>
+          </div>
+          <div class="faculty-card reveal">
+            <div class="faculty-img" style="background:linear-gradient(135deg,#0ea5e9,#1a56db);"><i class="fas fa-flask"></i></div>
+            <h3>Chemistry Faculty</h3>
+            <div class="role">Senior Chemistry Faculty</div>
+            <div class="details">
+              <span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Sc. Chemistry, DU</span>
+              <span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 8+ Years Experience</span>
+              <span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Organic</span>
+            </div>
+          </div>
+          <div class="faculty-card reveal">
+            <div class="faculty-img" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-chart-pie"></i></div>
+            <h3>Commerce Faculty</h3>
+            <div class="role">Senior Commerce Faculty</div>
+            <div class="details">
+              <span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Com, CA (Inter)</span>
+              <span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 9+ Years Experience</span>
+              <span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Accounts & Economics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why-choose">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Why Choose Fusion Coaching?</h2>
+          <p>What makes us the preferred choice for students and parents</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div><h3>Experienced Teachers</h3><p>Highly qualified faculty with years of teaching expertise.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-users"></i></div><h3>Small Batch Size</h3><p>Personalized attention with limited students per batch.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-question-circle"></i></div><h3>Daily Doubt Sessions</h3><p>Dedicated doubt-clearing sessions every single day.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-calendar-check"></i></div><h3>Weekly Tests</h3><p>Regular assessments to track and improve performance.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>Digital Study Material</h3><p>Access to premium digital notes and practice resources.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-file-alt"></i></div><h3>Parent Progress Reports</h3><p>Detailed monthly performance reports for parents.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-projector"></i></div><h3>Smart Classrooms</h3><p>Modern smart classrooms with advanced teaching aids.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-rupee-sign"></i></div><h3>Affordable Fees</h3><p>Quality education at accessible and competitive fees.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-compass"></i></div><h3>Career Guidance</h3><p>Expert career counseling for future academic paths.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-heart"></i></div><h3>Individual Attention</h3><p>Every student receives personal mentoring and support.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Our Results Speak</h2>
+          <p>Celebrating the success stories of our bright stars</p>
+        </div>
+        <div class="results-grid">
+          <div class="result-card reveal">
+            <div class="rank">AIR 42</div>
+            <div class="percent">99.8%</div>
+            <h4>Rahul Sharma</h4>
+            <div class="detail">JEE Advanced 2024</div>
+          </div>
+          <div class="result-card reveal">
+            <div class="rank">AIR 156</div>
+            <div class="percent">99.4%</div>
+            <h4>Priya Patel</h4>
+            <div class="detail">JEE Advanced 2024</div>
+          </div>
+          <div class="result-card reveal">
+            <div class="rank">99.6%</div>
+            <div class="percent">School Topper</div>
+            <h4>Amit Verma</h4>
+            <div class="detail">Class 12 CBSE 2024</div>
+          </div>
+          <div class="result-card reveal">
+            <div class="rank">99.2%</div>
+            <div class="percent">School Topper</div>
+            <h4>Sneha Gupta</h4>
+            <div class="detail">Class 12 CBSE 2024</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:40px;" class="reveal">
+          <p style="color:var(--text-secondary);font-size:16px;"><i class="fas fa-trophy" style="color:var(--gold);"></i> 1000+ students have secured admission to India's top colleges and universities.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>What Our Students Say</h2>
+          <p>Hear from our students and their parents</p>
+        </div>
+        <div class="testimonials-carousel reveal">
+          <div class="testimonials-track" id="testimonialTrack">
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <blockquote>"Fusion Coaching transformed my approach to Physics and Mathematics. The faculty's dedication is unmatched. I went from struggling in Class 11 to securing AIR 156 in JEE Advanced. Forever grateful!"</blockquote>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">RP</div>
+                  <div class="testimonial-author-info"><h4>Rahul Patel</h4><span>JEE Advanced 2024 · AIR 156</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <blockquote>"The small batch sizes and individual attention at Fusion made all the difference. Every doubt was addressed patiently. I scored 99.4% in my Class 12 boards. Highly recommended!"</blockquote>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">SK</div>
+                  <div class="testimonial-author-info"><h4>Sneha Kapoor</h4><span>Class 12 CBSE 2024 · 99.4%</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <blockquote>"As a parent, I was constantly updated about my child's progress. The weekly tests and parent reports are excellent. The teachers genuinely care about each student's success."</blockquote>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">ML</div>
+                  <div class="testimonial-author-info"><h4>Mrs. Lakshmi</h4><span>Parent of Class 12 Student</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <blockquote>"The Commerce faculty at Fusion is outstanding. Accounts and Economics were explained with such clarity that even complex topics felt simple. Scored 98.8% in my boards!"</blockquote>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">AM</div>
+                  <div class="testimonial-author-info"><h4>Arjun Mehta</h4><span>Class 12 Commerce 2024</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <div class="carousel-controls">
+            <button id="prevTestimonial" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
+            <button id="nextTestimonial" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Our Gallery</h2>
+          <p>Glimpses of life at Fusion Coaching</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal">
+            <svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);"><rect width="400" height="300" fill="none"/><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Classroom Session</text></svg>
+            <div class="gallery-overlay"><span>Smart Classroom</span></div>
+          </div>
+          <div class="gallery-item reveal">
+            <svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Lab Session</text></svg>
+            <div class="gallery-overlay"><span>Physics Lab</span></div>
+          </div>
+          <div class="gallery-item reveal">
+            <svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#e0e7ff,#ddd6fe);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Library</text></svg>
+            <div class="gallery-overlay"><span>Study Library</span></div>
+          </div>
+          <div class="gallery-item reveal">
+            <svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#fce7f3,#fbcfe8);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Award Ceremony</text></svg>
+            <div class="gallery-overlay"><span>Award Ceremony</span></div>
+          </div>
+          <div class="gallery-item reveal">
+            <svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#d1fae5,#a7f3d0);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Events</text></svg>
+            <div class="gallery-overlay"><span>Annual Function</span></div>
+          </div>
+          <div class="gallery-item reveal">
+            <svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#fef3c7,#fde68a);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Batch Photo</text></svg>
+            <div class="gallery-overlay"><span>Batch of 2024</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="admission">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Admission Process</h2>
+          <p>Your journey to success starts here in 4 simple steps</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="step-num">1</div>
+            <div class="content"><h3>Registration</h3><p>Fill out the online registration form or visit our center to register in person. Provide basic details and academic information.</p></div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="step-num">2</div>
+            <div class="content"><h3>Counseling</h3><p>Meet our academic counselors for a personalized discussion about your goals, strengths, and the right course for you.</p></div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="step-num">3</div>
+            <div class="content"><h3>Admission</h3><p>Complete the admission formalities, submit required documents, and pay the fees to confirm your seat.</p></div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="step-num">4</div>
+            <div class="content"><h3>Start Learning</h3><p>Begin your academic journey with expert faculty, study materials, and a structured learning path.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about Fusion Coaching</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal"><button class="faq-question">What courses does Fusion Coaching offer? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>We offer Science courses (Class 9-12 PCM, Physics, Chemistry, Mathematics, JEE Foundation) and Commerce courses (Class 11-12 Commerce, Accounts, Economics, Business Studies).</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">What is the batch size? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>We maintain small batch sizes of 25-30 students per class to ensure individual attention and personalized mentoring for every student.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">Are there any scholarship programs? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Yes, we offer merit-based scholarships for students with excellent academic records. Scholarships are awarded based on entrance test performance and previous academic achievements.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">Do you provide study material? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Absolutely! We provide comprehensive digital and printed study materials, practice question banks, and previous year question papers curated by our expert faculty.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">How can I enroll? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>You can visit our center directly, call us at +91 87005 17172, or fill out the contact form on this website. Our team will guide you through the admission process.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">Is there a demo class available? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Yes, we offer free demo classes so you can experience our teaching methodology before enrolling. Schedule your demo by contacting our admissions team.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Get In Touch</h2>
+          <p>We'd love to hear from you. Reach out for admissions or inquiries.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-form reveal">
+            <h3>Send Us a Message</h3>
+            <form id="contactForm" novalidate>
+              <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" name="name" placeholder="Enter your full name" required><div class="error">Please enter your name</div></div>
+              <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="Enter your email" required><div class="error">Please enter a valid email</div></div>
+              <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10,}"><div class="error">Please enter a valid 10-digit phone number</div></div>
+              <div class="form-group"><label for="course">Course Interested In</label><select id="course" name="course"><option value="">Select a course</option><option>Class 9 Science Foundation</option><option>Class 10 Science</option><option>Class 11 PCM</option><option>Class 12 PCM</option><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>JEE Foundation</option><option>Class 11 Commerce</option><option>Class 12 Commerce</option><option>Accounts</option><option>Economics</option><option>Business Studies</option></select></div>
+              <div class="form-group"><label for="message">Message *</label><textarea id="message" name="message" placeholder="Write your message here..." required></textarea><div class="error">Please enter your message</div></div>
+              <button type="submit" class="btn btn-primary ripple" style="width:100%;justify-content:center;"><i class="fas fa-paper-plane"></i> Send Message</button>
+              <div class="form-success" id="formSuccess"><i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We'll get back to you shortly.</div>
+            </form>
+          </div>
+          <div class="contact-info reveal">
+            <div class="contact-info-card"><i class="fas fa-phone-alt"></i><div><h4>Call Us</h4><p>+91 87005 17172</p><p>+91 87005 17173</p></div></div>
+            <div class="contact-info-card"><i class="fas fa-map-marker-alt"></i><div><h4>Visit Us</h4><p>E2/005 Bharat City, Near Teela Mod,<br>Opposite City Mall, India</p></div></div>
+            <div class="contact-info-card"><i class="fas fa-envelope"></i><div><h4>Email Us</h4><p>info@fusioncoaching.in</p><p>admissions@fusioncoaching.in</p></div></div>
+            <div class="contact-info-card"><i class="far fa-clock"></i><div><h4>Working Hours</h4><p>Monday - Saturday: 6:00 AM - 8:00 PM</p><p>Sunday: 8:00 AM - 2:00 PM</p></div></div>
+            <div class="contact-map">
+              <iframe src="https://maps.google.com/maps?q=Bharat%20City%20Teela%20Mod&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Fusion Coaching Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>Fusion Coaching</h2>
+          <p>Empowering students with quality education since 2016. We are committed to shaping the next generation of leaders, innovators, and achievers through academic excellence and personal mentorship.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#courses">Courses</a>
+            <a href="#faculty">Faculty</a>
+            <a href="#results">Results</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h3>Courses</h3>
+          <div class="footer-links">
+            <a href="#courses">Class 9-10 Science</a>
+            <a href="#courses">Class 11-12 PCM</a>
+            <a href="#courses">Physics, Chemistry, Maths</a>
+            <a href="#courses">JEE Foundation</a>
+            <a href="#courses">Class 11-12 Commerce</a>
+            <a href="#courses">Accounts & Economics</a>
+          </div>
+        </div>
+        <div>
+          <h3>Contact Details</h3>
+          <div class="footer-contact">
+            <p><i class="fas fa-phone-alt"></i> +91 87005 17172</p>
+            <p><i class="fas fa-envelope"></i> info@fusioncoaching.in</p>
+            <p><i class="fas fa-map-marker-alt"></i> E2/005 Bharat City, Near Teela Mod</p>
+            <p><i class="far fa-clock"></i> Mon-Sat: 6:00 AM - 8:00 PM</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Fusion Coaching. All rights reserved.</span>
+        <span><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Refund Policy</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.getElementById('loader').classList.add('hidden');
+        }, 1500);
+      });
+
+      const themeToggleTopbar = document.getElementById('themeToggleTopbar');
+      const themeIconTopbar = document.getElementById('themeIconTopbar');
+      const themeToggleMobile = document.getElementById('themeToggleMobile');
+      const themeIconMobile = document.getElementById('themeIconMobile');
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('fusion-theme', theme);
+        const isDark = theme === 'dark';
+        if(themeIconTopbar) themeIconTopbar.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        if(themeIconMobile) themeIconMobile.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      }
+
+      const savedTheme = localStorage.getItem('fusion-theme') || 'light';
+      setTheme(savedTheme);
+
+      function toggleThemeHandler() {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      }
+
+      if(themeToggleTopbar) themeToggleTopbar.addEventListener('click', toggleThemeHandler);
+      if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleThemeHandler);
+
+      const navToggle = document.getElementById('navToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      if(navToggle && mobileMenu) {
+        navToggle.addEventListener('click', function() {
+          navToggle.classList.toggle('active');
+          mobileMenu.classList.toggle('open');
+          const expanded = navToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true';
+          navToggle.setAttribute('aria-expanded', expanded);
+        });
+      }
+
+      window.closeMobileMenu = function() {
+        if(navToggle && mobileMenu) {
+          navToggle.classList.remove('active');
+          mobileMenu.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      };
+
+      if(mobileMenu) {
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', closeMobileMenu);
+        });
+      }
+
+      const navbar = document.getElementById('navbar');
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('#navLinks a:not(.btn):not(.portal-btn)');
+
+      function updateNav() {
+        if (!navbar) return;
+        if (window.scrollY > 60) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+
+        let current = '';
+        sections.forEach(function(section) {
+          const top = section.offsetTop - 220;
+          const bottom = top + section.offsetHeight;
+          if (window.scrollY >= top && window.scrollY < bottom) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateNav, { passive: true });
+      window.addEventListener('resize', updateNav, { passive: true });
+
+      const scrollTopBtn = document.getElementById('scrollTop');
+
+      window.addEventListener('scroll', function() {
+        if (!scrollTopBtn) return;
+        if (window.scrollY > 500) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      if(scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      const counters = document.querySelectorAll('.counter');
+
+      function animateCounters() {
+        counters.forEach(function(counter) {
+          const target = parseInt(counter.getAttribute('data-target'));
+          const current = parseInt(counter.textContent);
+          if (current < target) {
+            const increment = Math.ceil(target / 40);
+            const next = Math.min(current + increment, target);
+            counter.textContent = next;
+            setTimeout(animateCounters, 30);
+          } else {
+            counter.textContent = target;
+          }
+        });
+      }
+      setTimeout(animateCounters, 600);
+
+      const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+      function checkReveal() {
+        revealElements.forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          const winHeight = window.innerHeight;
+          if (rect.top < winHeight - 40) {
+            el.classList.add('visible');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      window.addEventListener('resize', checkReveal, { passive: true });
+      checkReveal();
+
+      const track = document.getElementById('testimonialTrack');
+      if (track) {
+        const slides = track.querySelectorAll('.testimonial-slide');
+        const dotsContainer = document.getElementById('carouselDots');
+        const prevBtn = document.getElementById('prevTestimonial');
+        const nextBtn = document.getElementById('nextTestimonial');
+        let currentSlide = 0;
+        let autoSlideInterval;
+
+        slides.forEach(function(_, i) {
+          const dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', function() { goToSlide(i); });
+          if(dotsContainer) dotsContainer.appendChild(dot);
+        });
+
+        function goToSlide(index) {
+          currentSlide = index;
+          const offset = -currentSlide * 100;
+          track.style.transform = 'translateX(' + offset + '%)';
+          if(dotsContainer) {
+            dotsContainer.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
+              dot.classList.toggle('active', i === currentSlide);
+            });
+          }
+        }
+
+        function nextSlide() {
+          goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        function prevSlideFunc() {
+          goToSlide((currentSlide - 1 + slides.length) % slides.length);
+        }
+
+        if(nextBtn) nextBtn.addEventListener('click', function() { nextSlide(); resetAutoSlide(); });
+        if(prevBtn) prevBtn.addEventListener('click', function() { prevSlideFunc(); resetAutoSlide(); });
+
+        function startAutoSlide() {
+          autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoSlide() {
+          clearInterval(autoSlideInterval);
+          startAutoSlide();
+        }
+        startAutoSlide();
+      }
+
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(function(item) {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', function() {
+          const isOpen = item.classList.contains('open');
+          faqItems.forEach(function(f) { f.classList.remove('open'); });
+          if (!isOpen) {
+            item.classList.add('open');
+          }
+        });
+      });
+
+      const contactForm = document.getElementById('contactForm');
+      const formSuccess = document.getElementById('formSuccess');
+
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          let valid = true;
+
+          const fields = [
+            { id: 'name', pattern: null },
+            { id: 'email', pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+            { id: 'phone', pattern: /^[0-9]{10,}$/ },
+            { id: 'message', pattern: null }
+          ];
+
+          fields.forEach(function(field) {
+            const input = document.getElementById(field.id);
+            if(!input) return;
+            const group = input.closest('.form-group');
+            let isValid = true;
+
+            if (field.pattern) {
+              isValid = field.pattern.test(input.value.trim());
+            } else {
+              isValid = input.value.trim().length > 0;
+            }
+
+            if (!isValid) {
+              group.classList.add('error');
+              valid = false;
+            } else {
+              group.classList.remove('error');
+            }
+          });
+
+          if (valid && formSuccess) {
+            formSuccess.style.display = 'block';
+            contactForm.reset();
+            setTimeout(function() {
+              formSuccess.style.display = 'none';
+            }, 5000);
+          }
+        });
+
+        document.querySelectorAll('.form-group input, .form-group textarea').forEach(function(el) {
+          el.addEventListener('input', function() {
+            this.closest('.form-group').classList.remove('error');
+          });
+        });
+      }
+
+      const particlesContainer = document.getElementById('particles');
+      function createParticles() {
+        if (!particlesContainer) return;
+        const symbols = ['🎓', '📚', '📐', '✏️', '🔬', 'π', '∑', '√', 'Ω', '💡', '⚛️'];
+        const count = Math.min(25, Math.floor(window.innerWidth / 45));
+        
+        for (let i = 0; i < count; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.fontSize = (Math.random() * 16 + 14) + 'px';
+          particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+          particle.style.animationDelay = '-' + (Math.random() * 20) + 's';
+          particlesContainer.appendChild(particle);
+        }
+      }
+      createParticles();
+
+      document.querySelectorAll('.ripple').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          const rect = btn.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple-effect';
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+          ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+          btn.appendChild(ripple);
+          setTimeout(function() { ripple.remove(); }, 600);
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          const href = anchor.getAttribute('href');
+          if (href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const offset = 72;
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeMobileMenu();
+        }
+      });
+    })();
+  </script>
+  
+  <script>
+    (function() {
+      const words = [
+          "Science Education",
+          "Physics Education",
+          "JEE Aspirants",
+          "NEET Aspirants",
+          "Board Toppers",
+          "Future Engineers",
+          "Future Doctors",
+          "Future Leaders"
+      ];
+
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const textElement = document.getElementById("changing-text");
+      
+      const typeSpeed = 100;
+      const eraseSpeed = 50;
+      const delayBetweenWords = 2000; 
+
+      function typeEffect() {
+        if (!textElement) return;
+
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+          textElement.textContent = currentWord.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          textElement.textContent = currentWord.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let nextActionTimeout = isDeleting ? eraseSpeed : typeSpeed;
+
+        if (!isDeleting && charIndex === currentWord.length) {
+          nextActionTimeout = delayBetweenWords;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          nextActionTimeout = 500; 
+        }
+
+        setTimeout(typeEffect, nextActionTimeout);
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(typeEffect, 1000);
+      });
+    })();
+  </script>
+</body>
+</html>
