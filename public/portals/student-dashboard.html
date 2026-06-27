@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - Fusion Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/portals.css">
+  <style>
+    /* Additional student-specific styles */
+    .test-question {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .option-item {
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .option-item:hover { border-color: var(--primary-light); background: rgba(26,86,219,0.02); }
+    .option-item.selected { border-color: var(--primary); background: rgba(26,86,219,0.06); }
+    .option-item.correct { border-color: #10b981; background: rgba(16,185,129,0.06); }
+    .option-item.wrong { border-color: #ef4444; background: rgba(239,68,68,0.06); }
+    .timer-display {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+    }
+    .question-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .question-nav-btn.answered { background: #10b981; color: #fff; border-color: #10b981; }
+    .question-nav-btn.current { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .question-nav-btn.flagged { background: #f59e0b; color: #fff; border-color: #f59e0b; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Fusion Coaching</h2>
+        <div class="user-info">
+          <div class="user-avatar" id="sidebarUserAvatar">S</div>
+          <div class="user-details">
+            <h4 id="sidebarUserName">Student</h4>
+            <span id="sidebarUserRole">student</span>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          <a class="nav-item active" data-tab="dashboard" href="#">
+            <i class="fas fa-th-large"></i> Dashboard
+          </a>
+          <a class="nav-item" data-tab="profile" href="#">
+            <i class="fas fa-user"></i> My Profile
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Academic</div>
+          <a class="nav-item" data-tab="attendance" href="#">
+            <i class="fas fa-calendar-check"></i> Attendance
+          </a>
+          <a class="nav-item" data-tab="marks" href="#">
+            <i class="fas fa-chart-bar"></i> Marks
+          </a>
+          <a class="nav-item" data-tab="tests" href="#">
+            <i class="fas fa-clipboard-list"></i> Online Tests
+          </a>
+          <a class="nav-item" data-tab="materials" href="#">
+            <i class="fas fa-book"></i> Study Materials
+          </a>
+          <a class="nav-item" data-tab="videos" href="#">
+            <i class="fas fa-play-circle"></i> Lecture Videos
+          </a>
+          <a class="nav-item" data-tab="homework" href="#">
+            <i class="fas fa-tasks"></i> Homework
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Support</div>
+          <a class="nav-item" data-tab="doubts" href="#">
+            <i class="fas fa-question-circle"></i> Doubts
+            <span class="badge" id="doubtsBadge" style="display:none">0</span>
+          </a>
+          <a class="nav-item" data-tab="notifications" href="#">
+            <i class="fas fa-bell"></i> Notifications
+            <span class="badge" id="notifBadge" style="display:none">0</span>
+          </a>
+          <a class="nav-item" data-tab="fees" href="#">
+            <i class="fas fa-rupee-sign"></i> Fee Details
+          </a>
+        </div>
+        <div class="nav-section">
+          <a class="nav-item" id="logoutBtn" href="#" style="color: #ef4444;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <button id="menuToggle" style="display:none;position:fixed;top:16px;left:16px;z-index:200;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Dashboard Tab -->
+      <div class="tab-content" id="tab-dashboard">
+        <div class="content-header">
+          <h1>Student Dashboard</h1>
+          <div class="header-actions">
+            <button class="btn btn-outline btn-sm" onclick="location.reload()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="theme-toggle" id="themeToggle" style="width:40px;height:40px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);cursor:pointer;">
+              <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="dashboardStats">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-info"><p>Attendance</p><h3 id="attendancePercent">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-info"><p>Overall %</p><h3 id="overallPercent">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="fas fa-trophy"></i></div>
+            <div class="stat-info"><p>Rank</p><h3 id="studentRank">-</h3></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fas fa-rupee-sign"></i></div>
+            <div class="stat-info"><p>Fee Status</p><h3 id="feeStatus">-</h3></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:20px;">
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Attendance Trend</h3>
+            <canvas id="attendanceChart" width="400" height="250"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom:16px;">Subject Performance</h3>
+            <canvas id="performanceChart" width="400" height="250"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other tabs would follow same pattern -->
+    </main>
+  </div>
+
+  <script src="/js/portal-common.js"></script>
+  <script src="/js/chart-init.js"></script>
+  <script>
+    // Student dashboard specific logic
+    document.addEventListener('DOMContentLoaded', async () => {
+      const { apiFetch, showToast } = window.FusionPortal;
+
+      // Load dashboard data
+      try {
+        const [profile, attendance, marks] = await Promise.all([
+          apiFetch('/student/profile'),
+          apiFetch('/student/attendance'),
+          apiFetch('/student/marks')
+        ]);
+
+        // Update stats
+        document.getElementById('attendancePercent').textContent = attendance.stats.percentage + '%';
+        document.getElementById('studentRank').textContent = marks.rank || 'N/A';
+        document.getElementById('feeStatus').textContent = profile.fee_status || 'Paid';
+
+        // Calculate overall percentage
+        if (marks.stats.length > 0) {
+          const overall = marks.stats.reduce((sum, s) => sum + parseFloat(s.avg_percentage), 0) / marks.stats.length;
+          document.getElementById('overallPercent').textContent = Math.round(overall) + '%';
+        }
+
+        // Draw charts
+        if (attendance.attendance.length > 0) {
+          const dates = attendance.attendance.map(a => new Date(a.date).getDate());
+          const presentData = attendance.attendance.map(a => a.status === 'present' ? 1 : 0);
+          
+          window.FusionCharts.createChart('attendanceChart', 'bar', {
+            labels: dates,
+            values: presentData
+          });
+        }
+      } catch (error) {
+        showToast('Failed to load dashboard: ' + error.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>
